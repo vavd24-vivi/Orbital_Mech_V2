@@ -1,0 +1,455 @@
+{
+  "_metadata": {
+    "description": "Orbit types catalog with real spacecraft examples and physical characteristics",
+    "sources": [
+      "Larson, W. J., & Wertz, J. R. (Eds.). (1999). Space Mission Engineering: The New SMAD. Microcosm Press.",
+      "Vallado, D. A. (2013). Fundamentals of Astrodynamics and Applications (4th ed.). Microcosm Press.",
+      "Curtis, H. D. (2013). Orbital Mechanics for Engineering Students (3rd ed.). Butterworth-Heinemann.",
+      "CelesTrak SATCAT (https://celestrak.org/satcat/)",
+      "ITU Radio Regulations — GEO arc filings"
+    ],
+    "retrieval_date": "2026-04-08"
+  },
+  "orbit_types": [
+    {
+      "id": "leo",
+      "name": "LEO — Low Earth Orbit",
+      "abbreviation": "LEO",
+      "altitude_range_km": [160, 2000],
+      "typical_altitude_km": 400,
+      "inclination_range_deg": [0, 98],
+      "eccentricity_typical": 0.001,
+      "orbital_period_range_minutes": [88, 127],
+      "description": "The most common orbit for spacecraft, ranging from the edge of significant atmosphere (~160 km) to the inner Van Allen radiation belt (~2 000 km). Shortest orbital periods, easiest to reach, but subject to atmospheric drag decay.",
+      "physical_characteristics": {
+        "atmospheric_drag": "Significant below 500 km; negligible above 800 km",
+        "radiation": "Below inner Van Allen belt — relatively benign",
+        "communication_latency_ms": "2–10",
+        "eclipse_fraction": "~35% of orbit in Earth shadow at 400 km",
+        "ground_track_coverage": "Global coverage with sufficient inclination and multiple satellites",
+        "delta_v_to_reach_km_s": "~9.3–9.5 from Earth's surface"
+      },
+      "advantages": [
+        "Low launch energy required (ΔV ≈ 9.3–9.4 km/s from equator)",
+        "Short communication delays (2–10 ms one-way)",
+        "Earth observation with high resolution possible",
+        "Easy to service or resupply (ISS servicing missions)"
+      ],
+      "disadvantages": [
+        "Orbital decay due to atmospheric drag (requires periodic reboost below ~600 km)",
+        "No continuous coverage of a fixed point (passes overhead for only ~10 min)",
+        "Many satellites needed for continuous global coverage (constellations)"
+      ],
+      "uses": [
+        "Human spaceflight — ISS, Tiangong, future commercial stations",
+        "Earth observation — Landsat, Sentinel, PlanetScope",
+        "Broadband constellations — Starlink, OneWeb, Amazon Kuiper",
+        "Technology demonstration",
+        "Astronomy — Hubble, Chandra, Fermi"
+      ],
+      "real_examples": [
+        {
+          "name": "ISS (ZARYA)",
+          "norad_id": 25544,
+          "altitude_km": 408,
+          "inclination_deg": 51.64,
+          "period_minutes": 92.9,
+          "launch_year": 1998,
+          "notes": "Orbital maintenance reboosts ~4–8 times/year to counteract drag"
+        },
+        {
+          "name": "Hubble Space Telescope",
+          "norad_id": 20580,
+          "altitude_km": 538,
+          "inclination_deg": 28.47,
+          "period_minutes": 95.4,
+          "launch_year": 1990,
+          "notes": "Above bulk of atmosphere; natural decay ~50 years from last servicing"
+        },
+        {
+          "name": "Starlink-1007",
+          "norad_id": 44713,
+          "altitude_km": 550,
+          "inclination_deg": 53.05,
+          "period_minutes": 95.7,
+          "launch_year": 2019,
+          "notes": "Autonomous de-orbit capability; designed to deorbit within 5 years if active system fails"
+        }
+      ],
+      "j2_raan_precession_rate": "Varies with inclination: 0 at 90°, maximum at 0°; ~7°/day at 28°, ~5°/day at 52°"
+    },
+    {
+      "id": "meo",
+      "name": "MEO — Medium Earth Orbit",
+      "abbreviation": "MEO",
+      "altitude_range_km": [2000, 35786],
+      "typical_altitude_km": 20200,
+      "inclination_range_deg": [0, 70],
+      "eccentricity_typical": 0.01,
+      "orbital_period_range_minutes": [127, 1436],
+      "description": "Between LEO and GEO, MEO is home to the navigation satellite constellations (GPS, GLONASS, Galileo, BeiDou) at ~20 000 km. Longer periods, full global coverage from ~24 satellites.",
+      "physical_characteristics": {
+        "atmospheric_drag": "Negligible",
+        "radiation": "Crosses outer Van Allen belt — significant proton/electron flux; shielding required",
+        "communication_latency_ms": "50–250",
+        "eclipse_fraction": "~20–30%",
+        "delta_v_to_reach_km_s": "~3.9 additional above LEO injection"
+      },
+      "advantages": [
+        "Global navigation coverage with modest constellation size (~24–30 satellites)",
+        "Lower launch energy than GEO",
+        "Moderate communication delays"
+      ],
+      "disadvantages": [
+        "Van Allen radiation belt exposure limits satellite lifetimes",
+        "No regional high-revisit capability"
+      ],
+      "uses": [
+        "Global Navigation Satellite Systems (GNSS)",
+        "Space science (radiation belt study)",
+        "Some communications relay missions"
+      ],
+      "real_examples": [
+        {
+          "name": "GPS IIF-10 (PRN 08)",
+          "norad_id": 40105,
+          "altitude_km": 20200,
+          "inclination_deg": 55.0,
+          "period_minutes": 718,
+          "launch_year": 2015,
+          "constellation": "GPS Block IIF — 12 satellites",
+          "notes": "GPS constellation uses 24 operational satellites in 6 orbital planes, 4 per plane"
+        },
+        {
+          "name": "Galileo-FOC-1 (GSAT0201)",
+          "norad_id": 40128,
+          "altitude_km": 23222,
+          "inclination_deg": 56.0,
+          "period_minutes": 845,
+          "launch_year": 2015,
+          "constellation": "Galileo Full Operational Capability",
+          "notes": "Europe's GNSS — 30 satellites in 3 orbital planes at 56° inclination"
+        }
+      ],
+      "gnss_constellations": {
+        "GPS":     { "operator": "USAF/USSF", "altitude_km": 20200, "inclination_deg": 55, "planes": 6, "sats_per_plane": 4 },
+        "GLONASS": { "operator": "Roscosmos", "altitude_km": 19130, "inclination_deg": 64.8, "planes": 3, "sats_per_plane": 8 },
+        "Galileo": { "operator": "ESA/GSA",   "altitude_km": 23222, "inclination_deg": 56, "planes": 3, "sats_per_plane": 10 },
+        "BeiDou":  { "operator": "CNSA",      "altitude_km": 21528, "inclination_deg": 55, "planes": 3, "sats_per_plane": 8, "notes": "BeiDou-3 MEO + GEO + IGSO mixed constellation" }
+      }
+    },
+    {
+      "id": "geo",
+      "name": "GEO — Geostationary Orbit",
+      "abbreviation": "GEO",
+      "altitude_range_km": [35686, 35886],
+      "typical_altitude_km": 35786,
+      "inclination_range_deg": [0, 0.1],
+      "eccentricity_typical": 0.0001,
+      "orbital_period_range_minutes": [1436, 1436],
+      "description": "A circular equatorial orbit at 35 786 km where the orbital period equals Earth's sidereal rotation period (23 h 56 min 4 s). The satellite appears stationary relative to Earth's surface.",
+      "physical_characteristics": {
+        "orbital_radius_km": 42164,
+        "orbital_velocity_km_s": 3.07,
+        "atmospheric_drag": "Zero",
+        "radiation": "Above Van Allen belts — high energy particle environment",
+        "communication_latency_ms": "239–280",
+        "eclipse_fraction": "~1.2% (brief around equinoxes)",
+        "delta_v_to_reach_km_s": "~4.2 GTO injection + 1.8 GEO circularisation ≈ ~6 total above LEO",
+        "annual_station_keeping_dv_km_s": 0.05
+      },
+      "advantages": [
+        "Permanently visible from 40% of Earth's surface — ideal for continuous regional coverage",
+        "No tracking antennas required for ground stations",
+        "Entire ocean/continent in single field of view for weather/communications",
+        "No revisit scheduling needed"
+      ],
+      "disadvantages": [
+        "High radiation environment",
+        "Large latency (240 ms) unsuitable for low-latency applications",
+        "No coverage above ~75° latitude",
+        "Expensive and energy-intensive to reach (large ΔV)",
+        "GEO arc is crowded — ITU coordination required"
+      ],
+      "uses": [
+        "Television direct broadcast (DirecTV, Sky, Eutelsat)",
+        "Weather observation (GOES, Meteosat, Himawari)",
+        "High-speed satellite internet (ViaSat-3, HughesNet)",
+        "Military communications (MILSTAR, WGS)",
+        "Maritime and aeronautical communications (Inmarsat)"
+      ],
+      "real_examples": [
+        {
+          "name": "GOES-16",
+          "norad_id": 41866,
+          "longitude_deg_E": 284.8,
+          "altitude_km": 35786,
+          "inclination_deg": 0.085,
+          "period_minutes": 1436.1,
+          "launch_year": 2016,
+          "notes": "GOES-East at 75.2°W — primary US East Coast + Atlantic weather satellite"
+        },
+        {
+          "name": "GOES-18",
+          "norad_id": 51850,
+          "longitude_deg_E": 223.0,
+          "altitude_km": 35786,
+          "inclination_deg": 0.034,
+          "period_minutes": 1436.1,
+          "launch_year": 2022,
+          "notes": "GOES-West at 137°W — primary US West Coast + Pacific weather satellite"
+        },
+        {
+          "name": "Intelsat 37e",
+          "norad_id": 41789,
+          "longitude_deg_E": 18.0,
+          "altitude_km": 35786,
+          "inclination_deg": 0.01,
+          "period_minutes": 1436.1,
+          "launch_year": 2017,
+          "notes": "High-throughput commercial communications satellite covering Africa and Europe"
+        }
+      ],
+      "graveyard_orbit": {
+        "altitude_km": 36286,
+        "description": "Satellites at end-of-life are raised 300+ km above GEO to the 'graveyard belt' to clear the valuable GEO arc per ITU regulations."
+      }
+    },
+    {
+      "id": "heo",
+      "name": "HEO — Highly Elliptical Orbit",
+      "abbreviation": "HEO",
+      "altitude_range_km": [500, 50000],
+      "typical_apogee_km": 39000,
+      "typical_perigee_km": 1000,
+      "inclination_typical_deg": 63.4,
+      "eccentricity_typical": 0.72,
+      "orbital_period_range_minutes": [480, 720],
+      "description": "Highly elliptical orbits with low perigee and very high apogee. The satellite spends most of its orbital time near apogee (Kepler's second law), providing long dwell over a region. The 63.4° Molniya inclination is the critical inclination where J2 causes no argument-of-perigee precession.",
+      "physical_characteristics": {
+        "dwell_time_near_apogee_hours": "8 per 12-hour orbit",
+        "apogee_over_hemisphere": "Northern hemisphere for Molniya (63.4° inclination)",
+        "radiation": "Passes through both Van Allen belts twice per orbit",
+        "eclipse_fraction": "~30%"
+      },
+      "advantages": [
+        "Long dwell times over high latitudes (8 h out of 12 h)",
+        "Better polar coverage than GEO",
+        "Useful for northern hemisphere communications where GEO elevation is low"
+      ],
+      "disadvantages": [
+        "Complex stationkeeping",
+        "Radiation belt crossings degrade electronics",
+        "Coverage requires constellation of 3+ satellites for continuous service"
+      ],
+      "uses": [
+        "Soviet/Russian Molniya communications constellation",
+        "Tundra orbit (SiriusXM digital radio satellites)",
+        "Science missions avoiding radiation belts (INTEGRAL, XMM-Newton)",
+        "Surveillance and early-warning satellites"
+      ],
+      "critical_inclination": {
+        "value_deg": 63.4,
+        "description": "At 63.4° inclination, the J2 zonal harmonic produces equal and opposite rates in the secular drift of argument of perigee, causing it to remain frozen. This keeps the apogee over the northern hemisphere permanently."
+      },
+      "real_examples": [
+        {
+          "name": "Molniya 3-50",
+          "norad_id": 25847,
+          "perigee_km": 507,
+          "apogee_km": 39852,
+          "inclination_deg": 63.41,
+          "eccentricity": 0.720,
+          "period_minutes": 717,
+          "launch_year": 1999,
+          "country": "Russia",
+          "notes": "Classic Molniya orbit design for Russian high-latitude communications"
+        },
+        {
+          "name": "INTEGRAL",
+          "norad_id": 27540,
+          "perigee_km": 9000,
+          "apogee_km": 153000,
+          "inclination_deg": 51.6,
+          "eccentricity": 0.830,
+          "period_minutes": 3837,
+          "launch_year": 2002,
+          "country": "ESA",
+          "notes": "Orbit chosen to spend maximum time above Van Allen belts for clean gamma-ray observations"
+        }
+      ]
+    },
+    {
+      "id": "sso",
+      "name": "SSO — Sun-Synchronous Orbit",
+      "abbreviation": "SSO",
+      "altitude_range_km": [400, 1000],
+      "typical_altitude_km": 700,
+      "inclination_typical_deg": 98.2,
+      "inclination_range_deg": [96, 100],
+      "eccentricity_typical": 0.001,
+      "orbital_period_range_minutes": [94, 105],
+      "description": "A retrograde near-polar orbit where the J2 oblateness effect causes the orbital plane to precess ~0.9856°/day eastward, exactly matching Earth's annual orbital motion around the Sun. This keeps the angle between the orbital plane and the Sun-Earth line constant — passing over any location at the same local solar time every day.",
+      "physical_characteristics": {
+        "nodal_precession_rate_deg_per_day": 0.9856,
+        "local_solar_time_of_descending_node": "Typically 10:30 or 13:30 for Earth observation",
+        "swath_width_km_typical": "60–400 depending on sensor",
+        "global_coverage_days": "4–26 depending on swath width",
+        "atmospheric_drag": "Moderate — orbital maintenance may be required"
+      },
+      "advantages": [
+        "Consistent illumination conditions for optical Earth observation",
+        "Near-polar inclination gives global coverage",
+        "Regular revisit at predictable local time — ideal for change detection"
+      ],
+      "disadvantages": [
+        "Not useful for equatorial-region-only observation",
+        "Retrograde orbit requires slightly more ΔV than prograde",
+        "Coverage gaps at poles (true polar satellites go to ~90°+)"
+      ],
+      "uses": [
+        "Optical Earth observation (Sentinel-2, Landsat, SPOT, Planet)",
+        "Radar SAR (Sentinel-1, TerraSAR-X, RADARSAT)",
+        "Weather/atmosphere (Metop, NOAA POES, JPSS/NOAA-20)",
+        "Ocean altimetry (Sentinel-6 Michael Freilich)",
+        "Climate monitoring (Terra, Aqua, Suomi NPP)"
+      ],
+      "sso_condition": {
+        "formula": "cos(i) = -(3/2)(J2 R_E² / n a²) × (n_sun / n)",
+        "description": "For a given altitude, solve for retrograde inclination i such that RAAN precession rate = 0.9856°/day (Earth's mean motion around the Sun).",
+        "example_altitude_km": 705,
+        "example_inclination_deg": 98.22
+      },
+      "real_examples": [
+        {
+          "name": "Sentinel-2A",
+          "norad_id": 40697,
+          "altitude_km": 786,
+          "inclination_deg": 98.57,
+          "descending_node_ltan": "10:30",
+          "revisit_days": 10,
+          "launch_year": 2015,
+          "country": "ESA"
+        },
+        {
+          "name": "Landsat 9",
+          "norad_id": 49260,
+          "altitude_km": 705,
+          "inclination_deg": 98.22,
+          "descending_node_ltan": "10:00",
+          "revisit_days": 16,
+          "launch_year": 2021,
+          "country": "USA"
+        },
+        {
+          "name": "NOAA-20 (JPSS-1)",
+          "norad_id": 43013,
+          "altitude_km": 824,
+          "inclination_deg": 98.73,
+          "descending_node_ltan": "13:30",
+          "revisit_days": 1,
+          "launch_year": 2017,
+          "country": "USA",
+          "notes": "Wide-swath VIIRS instrument provides daily global coverage"
+        }
+      ]
+    },
+    {
+      "id": "polar",
+      "name": "Polar Orbit",
+      "abbreviation": "PO",
+      "altitude_range_km": [300, 1000],
+      "typical_altitude_km": 600,
+      "inclination_typical_deg": 90,
+      "eccentricity_typical": 0.001,
+      "orbital_period_range_minutes": [90, 105],
+      "description": "Orbits with inclination near 90°, passing over (or near) both poles. Earth rotates beneath the satellite, allowing complete global coverage every ~14 orbits (~24 hours). Not to be confused with SSO (which is retrograde and uses J2 precession).",
+      "advantages": [
+        "True global coverage including poles",
+        "Rapid complete Earth coverage (24 hours)",
+        "Useful for scientific missions needing polar data"
+      ],
+      "uses": [
+        "Atmospheric science",
+        "Space weather monitoring",
+        "Gravimetric mapping (GRACE, GOCE)",
+        "Geodetic reference missions"
+      ],
+      "real_examples": [
+        {
+          "name": "GRACE Follow-On-A",
+          "norad_id": 43476,
+          "altitude_km": 490,
+          "inclination_deg": 88.99,
+          "launch_year": 2018,
+          "notes": "Measures Earth gravity field variations using satellite-to-satellite ranging"
+        },
+        {
+          "name": "GOCE",
+          "norad_id": 34602,
+          "altitude_km": 255,
+          "inclination_deg": 96.7,
+          "launch_year": 2009,
+          "notes": "Extremely low orbit (255 km) for high-resolution gravity gradiometry; ion thrusters compensated drag"
+        }
+      ]
+    },
+    {
+      "id": "lagrange",
+      "name": "Lagrange Point Orbits",
+      "abbreviation": "L1/L2",
+      "altitude_range_km": [1400000, 1600000],
+      "typical_altitude_km": 1500000,
+      "description": "Orbits around the Sun-Earth or Earth-Moon system Lagrange points. L1 (1.5M km sunward) and L2 (1.5M km anti-Sun) are semi-stable — small station-keeping burns maintain halo or Lissajous orbits. These are not true Keplerian orbits around Earth.",
+      "lagrange_points": {
+        "L1": {
+          "location": "1.501×10⁶ km from Earth toward Sun (0.01 AU)",
+          "stability": "Unstable — periodic station-keeping required (~10 m/s/year)",
+          "uses": ["Solar monitoring", "Space weather forecasting", "Sun observation"],
+          "missions": ["SOHO (1995)", "ACE (1997)", "DSCOVR (2015)", "Lisa Pathfinder (2015)"]
+        },
+        "L2": {
+          "location": "1.501×10⁶ km from Earth away from Sun (0.01 AU)",
+          "stability": "Unstable — periodic station-keeping required (~2–30 m/s/year)",
+          "uses": ["Deep-space observatories needing stable thermal environment", "Infrared/UV astronomy"],
+          "missions": ["WMAP (2001)", "Planck (2009)", "Gaia (2013)", "JWST (2021)", "Euclid (2023)"]
+        },
+        "L4_L5": {
+          "location": "60° ahead/behind Earth in its orbit (at 1 AU)",
+          "stability": "Stable (Trojan asteroids)",
+          "missions": ["No human-built satellites yet; proposed for space telescopes and solar weather monitoring"]
+        }
+      },
+      "real_examples": [
+        {
+          "name": "James Webb Space Telescope",
+          "norad_id": 50463,
+          "location": "L2",
+          "distance_from_earth_km": 1500000,
+          "launch_year": 2021,
+          "orbit_type": "Halo orbit around L2",
+          "station_keeping_budget_km_s_per_year": 0.002,
+          "notes": "Launched Ariane 5; L2 insertion burn Dec 24 2021; full operations Jun 2022. 10-year nominal mission."
+        },
+        {
+          "name": "SOHO",
+          "norad_id": 23726,
+          "location": "L1",
+          "distance_from_earth_km": 1500000,
+          "launch_year": 1995,
+          "orbit_type": "Halo orbit around L1",
+          "notes": "Operated since 1996 — far exceeds original 2-year design life. Provides 24/7 solar wind data."
+        },
+        {
+          "name": "Gaia",
+          "norad_id": 39479,
+          "location": "L2",
+          "distance_from_earth_km": 1500000,
+          "launch_year": 2013,
+          "orbit_type": "Lissajous orbit around L2",
+          "notes": "ESA astrometry mission mapping >1.8 billion stars. Lissajous orbit keeps it away from Earth's shadow."
+        }
+      ]
+    }
+  ]
+}

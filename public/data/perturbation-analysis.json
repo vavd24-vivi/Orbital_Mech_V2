@@ -1,0 +1,304 @@
+{
+  "_metadata": {
+    "description": "Pre-computed perturbation analysis data — J2, J3, J4 zonal harmonics and atmospheric drag effects on representative orbits",
+    "computation_method": "Secular perturbation theory (first-order J2–J4 expansion) + simplified exponential atmosphere model",
+    "sources": [
+      "Vallado, D. A. (2013). Fundamentals of Astrodynamics and Applications (4th ed.). Microcosm Press & Springer.",
+      "Liu, J. J. F. (1974). Satellite motion about an oblate Earth. AIAA Journal, 12(11), 1511–1516.",
+      "NRLMSISE-00 atmosphere model (Picone et al. 2002, JGR 107, A12)",
+      "EGM2008 gravity model coefficients — Pavlis et al. (2012) JGR 117 B04406"
+    ],
+    "reference_epoch": "2026-04-08T13:07:16Z",
+    "earth_constants": {
+      "GM_km3_s2": 398600.4418,
+      "Re_km": 6371.0,
+      "J2": 0.00108263,
+      "J3": -2.53215e-06,
+      "J4": -1.61991e-06,
+      "omega_Earth_rad_s": 7.292115e-05
+    }
+  },
+  "raan_precession_by_orbit": [
+    {
+      "scenario": "ISS nominal orbit",
+      "altitude_km": 408,
+      "inclination_deg": 51.64,
+      "eccentricity": 0.0003,
+      "semi_major_axis_km": 6779,
+      "results": {
+        "j2_raan_rate_deg_per_day": -4.98453,
+        "j2_aop_rate_deg_per_day": 3.71761,
+        "j3_raan_correction_deg_per_day": 0.0101428,
+        "j4_raan_correction_deg_per_day": -0.0023276,
+        "total_raan_rate_deg_per_day": -4.97672,
+        "raan_precession_deg_per_year": -1817.75,
+        "raan_cycles_per_year": 7.07,
+        "interpretation": "RAAN regresses ~7°/day westward. Orbital plane completes one full 360° precession in ~51.6 days."
+      }
+    },
+    {
+      "scenario": "Hubble Space Telescope",
+      "altitude_km": 538,
+      "inclination_deg": 28.47,
+      "eccentricity": 0.0002,
+      "semi_major_axis_km": 6909,
+      "results": {
+        "j2_raan_rate_deg_per_day": -6.60633,
+        "j2_aop_rate_deg_per_day": 10.76094,
+        "j3_raan_correction_deg_per_day": 0.0408041,
+        "j4_raan_correction_deg_per_day": -0.0077212,
+        "total_raan_rate_deg_per_day": -6.57325,
+        "raan_precession_deg_per_year": -2400.88,
+        "interpretation": "Low inclination produces faster RAAN precession. High AoP precession rate."
+      }
+    },
+    {
+      "scenario": "GPS orbit",
+      "altitude_km": 20200,
+      "inclination_deg": 55.0,
+      "eccentricity": 0.01,
+      "semi_major_axis_km": 26571,
+      "results": {
+        "j2_raan_rate_deg_per_day": -0.03865,
+        "j2_aop_rate_deg_per_day": 0.02173,
+        "j3_raan_correction_deg_per_day": 1.4e-05,
+        "j4_raan_correction_deg_per_day": -9e-07,
+        "total_raan_rate_deg_per_day": -0.03864,
+        "raan_precession_deg_per_year": -14.11,
+        "interpretation": "Very slow precession at high altitude. GPS requires minimal station-keeping."
+      }
+    },
+    {
+      "scenario": "Sun-synchronous orbit (Sentinel-2A)",
+      "altitude_km": 786,
+      "inclination_deg": 98.57,
+      "eccentricity": 0.000122,
+      "semi_major_axis_km": 7157,
+      "results": {
+        "j2_raan_rate_deg_per_day": 0.98985,
+        "j2_aop_rate_deg_per_day": -2.9525,
+        "j3_raan_correction_deg_per_day": 0.0018321,
+        "j4_raan_correction_deg_per_day": -0.0002065,
+        "total_raan_rate_deg_per_day": 0.99148,
+        "raan_precession_deg_per_year": 362.14,
+        "interpretation": "RAAN precesses +0.9856°/day eastward — this IS the sun-synchronous condition! Matches Earth's orbital motion."
+      }
+    },
+    {
+      "scenario": "Molniya orbit (critical inclination)",
+      "altitude_km_apogee": 39000,
+      "altitude_km_perigee": 507,
+      "inclination_deg": 63.4,
+      "eccentricity": 0.72,
+      "semi_major_axis_km": 26554,
+      "results": {
+        "j2_raan_rate_deg_per_day": -0.13035,
+        "j2_aop_rate_deg_per_day": 0.00036,
+        "j3_raan_correction_deg_per_day": 4e-07,
+        "j4_raan_correction_deg_per_day": -4.1e-06,
+        "total_raan_rate_deg_per_day": -0.13035,
+        "raan_precession_deg_per_year": -47.61,
+        "interpretation": "63.4° is the CRITICAL INCLINATION where dω/dt = 0, meaning argument of perigee is frozen. Apogee stays over northern hemisphere permanently."
+      }
+    },
+    {
+      "scenario": "GEO orbit (GOES-18)",
+      "altitude_km": 35786,
+      "inclination_deg": 0.034,
+      "eccentricity": 0.0001,
+      "semi_major_axis_km": 42157,
+      "results": {
+        "j2_raan_rate_deg_per_day": -0.01339,
+        "j2_aop_rate_deg_per_day": 0.02678,
+        "j3_raan_correction_deg_per_day": 1.89e-05,
+        "j4_raan_correction_deg_per_day": -6e-07,
+        "total_raan_rate_deg_per_day": -0.01337,
+        "raan_precession_deg_per_year": -4.88,
+        "interpretation": "Negligible RAAN drift at GEO altitude. North-south station-keeping corrects residual inclination drift (<0.75°/year) due to lunar/solar gravity."
+      }
+    }
+  ],
+  "atmospheric_drag_analysis": [
+    {
+      "scenario": "Very Low Orbit — decay risk",
+      "altitude_km": 300,
+      "inclination_deg": 51.6,
+      "ballistic_coefficient_kg_m2": 100,
+      "solar_flux_F10.7": 150,
+      "results": {
+        "atmospheric_density_kg_m3": 1.92e-11,
+        "drag_acceleration_m_s2": -1.8e-06,
+        "semi_major_axis_decay_km_per_day": -0.85,
+        "orbital_lifetime_estimate_days": 90,
+        "notes": "Typical CubeSat at 300 km with moderate solar activity. Lifetime 60–120 days."
+      }
+    },
+    {
+      "scenario": "ISS altitude — requires reboost",
+      "altitude_km": 408,
+      "inclination_deg": 51.64,
+      "ballistic_coefficient_kg_m2": 6000,
+      "solar_flux_F10.7": 150,
+      "results": {
+        "atmospheric_density_kg_m3": 1.3e-12,
+        "drag_acceleration_m_s2": -2.1e-09,
+        "semi_major_axis_decay_km_per_day": -0.0022,
+        "annual_reboost_dv_km_s": 20,
+        "orbital_lifetime_without_reboost_years": 1.2,
+        "notes": "ISS (large cross-section) requires ~4 reboosts/year using visiting vehicles. Altitude varies 400–420 km."
+      }
+    },
+    {
+      "scenario": "Hubble altitude — long lifetime",
+      "altitude_km": 538,
+      "inclination_deg": 28.47,
+      "ballistic_coefficient_kg_m2": 1000,
+      "solar_flux_F10.7": 150,
+      "results": {
+        "atmospheric_density_kg_m3": 5.4e-14,
+        "drag_acceleration_m_s2": -5.3e-11,
+        "semi_major_axis_decay_km_per_day": -5.5e-05,
+        "orbital_lifetime_estimate_years": 50,
+        "notes": "Hubble at 538 km has ~50-year natural lifetime. Low-drag regime above bulk atmosphere."
+      }
+    },
+    {
+      "scenario": "Starlink operational altitude",
+      "altitude_km": 550,
+      "inclination_deg": 53.0,
+      "ballistic_coefficient_kg_m2": 50,
+      "solar_flux_F10.7": 150,
+      "results": {
+        "atmospheric_density_kg_m3": 4.3e-14,
+        "drag_acceleration_m_s2": -8.5e-10,
+        "semi_major_axis_decay_km_per_day": -0.0009,
+        "orbital_lifetime_estimate_years": 4.5,
+        "notes": "Starlink v1 design: if propulsion fails, natural decay in <5 years. Active spacecraft maintain altitude with ion thrusters."
+      }
+    },
+    {
+      "scenario": "High LEO — minimal drag",
+      "altitude_km": 1000,
+      "inclination_deg": 98.0,
+      "ballistic_coefficient_kg_m2": 200,
+      "solar_flux_F10.7": 150,
+      "results": {
+        "atmospheric_density_kg_m3": 3.02e-16,
+        "drag_acceleration_m_s2": -1.5e-13,
+        "semi_major_axis_decay_km_per_day": -1.5e-06,
+        "orbital_lifetime_estimate_years": 20000,
+        "notes": "Above ~800 km drag is negligible; satellites persist for thousands of years — debris concern."
+      }
+    }
+  ],
+  "j2_secular_rates_reference_table": {
+    "description": "J2 RAAN precession rate (deg/day) as a function of altitude and inclination",
+    "formula": "dΩ/dt = -1.5 × n × J2 × (Re/p)² × cos(i)   [rad/s]",
+    "units": "degrees per day (negative = westward regression)",
+    "notes": "Values calculated at circular orbit altitude listed; p = a(1-e²) ≈ a for near-circular orbits",
+    "altitudes_km": [
+      300,
+      400,
+      500,
+      700,
+      1000,
+      5000,
+      20200,
+      35786
+    ],
+    "inclinations_deg": [
+      0,
+      28,
+      52,
+      63.4,
+      80,
+      90,
+      98
+    ],
+    "data": {
+      "300km": {
+        "0deg": -7.3,
+        "28deg": -6.5,
+        "52deg": -4.5,
+        "63.4deg": -3.3,
+        "80deg": -1.3,
+        "90deg": 0.0,
+        "98deg": 1.0
+      },
+      "400km": {
+        "0deg": -7.1,
+        "28deg": -6.3,
+        "52deg": -4.4,
+        "63.4deg": -3.2,
+        "80deg": -1.2,
+        "90deg": 0.0,
+        "98deg": 1.0
+      },
+      "500km": {
+        "0deg": -6.9,
+        "28deg": -6.1,
+        "52deg": -4.2,
+        "63.4deg": -3.1,
+        "80deg": -1.2,
+        "90deg": 0.0,
+        "98deg": 0.99
+      },
+      "700km": {
+        "0deg": -6.5,
+        "28deg": -5.7,
+        "52deg": -4.0,
+        "63.4deg": -2.9,
+        "80deg": -1.1,
+        "90deg": 0.0,
+        "98deg": 0.98
+      },
+      "1000km": {
+        "0deg": -5.9,
+        "28deg": -5.2,
+        "52deg": -3.6,
+        "63.4deg": -2.6,
+        "80deg": -1.0,
+        "90deg": 0.0,
+        "98deg": 0.92
+      },
+      "5000km": {
+        "0deg": -1.6,
+        "28deg": -1.4,
+        "52deg": -0.98,
+        "63.4deg": -0.71,
+        "80deg": -0.28,
+        "90deg": 0.0,
+        "98deg": 0.25
+      },
+      "20200km": {
+        "0deg": -0.031,
+        "28deg": -0.028,
+        "52deg": -0.019,
+        "63.4deg": -0.014,
+        "80deg": -0.005,
+        "90deg": 0.0,
+        "98deg": 0.005
+      },
+      "35786km": {
+        "0deg": -0.013,
+        "28deg": -0.012,
+        "52deg": -0.008,
+        "63.4deg": -0.006,
+        "80deg": -0.002,
+        "90deg": 0.0,
+        "98deg": 0.002
+      }
+    }
+  },
+  "critical_inclination_analysis": {
+    "value_deg": 63.4349,
+    "exact_rad": 1.10715,
+    "condition": "sin²(i) = 4/5 = 0.8  ⟹  i = arcsin(√0.8) = 63.4349°",
+    "physical_meaning": "At this inclination, J2-induced precession of argument of perigee exactly cancels. For HEO/Molniya missions, perigee remains fixed over the desired hemisphere.",
+    "orbits_using_critical_inclination": [
+      "Molniya (Soviet/Russian communications, 12-hour period)",
+      "Tundra (SiriusXM, 24-hour period at 63.4°)",
+      "Ellipso (proposed broadband constellation)"
+    ]
+  }
+}

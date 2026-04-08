@@ -361,20 +361,12 @@ async function requestGroundTrackMap(orbitParams) {
     
     try {
         // Use animation endpoint to get ground track
-        const response = await fetch(`${API_BASE_URL}/animation/ground-track-trace`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                satellite_tle: orbitParams.tle,
-                start_datetime: orbitParams.start_datetime || new Date().toISOString(),
-                duration_minutes: orbitParams.duration_minutes || 120,
-                step_seconds: orbitParams.step_seconds || 10
-            })
+        const data = await apiCall('/animation/ground-track-trace', 'POST', {
+            satellite_tle: orbitParams.tle,
+            start_datetime: orbitParams.start_datetime || new Date().toISOString(),
+            duration_minutes: orbitParams.duration_minutes || 120,
+            step_seconds: orbitParams.step_seconds || 10
         });
-        
-        if (!response.ok) throw new Error(`API error: ${response.status}`);
-        
-        const data = await response.json();
         
         // Clear previous data
         clearMapData();

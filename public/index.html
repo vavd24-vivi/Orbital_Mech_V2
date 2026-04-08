@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbital Dynamics - Interactive Learning Platform</title>
+    
+    <!-- CesiumJS -->
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.110/Cesium.js"></script>
+    <link href="https://cesium.com/downloads/cesiumjs/releases/1.110/Widgets/widgets.css" rel="stylesheet">
+    
+    <!-- Firebase SDK (compat for namespaced APIs used in this project) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+    
+    <!-- Bootstrap for styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">🚀 Orbital Dynamics</span>
+            <span class="navbar-text text-muted">Interactive Learning Platform</span>
+            <div id="auth-section" class="ms-auto">
+                <!-- Auth UI will be injected here -->
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid main-content">
+        <div class="row h-100">
+            <!-- Sidebar Navigation -->
+            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <div class="position-sticky pt-3">
+                    <h5 class="px-3">Modules</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-section="home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-section="tle">TLE Understanding</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-section="keplerian">Keplerian Elements</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-section="orbit-types">Orbit Types</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-section="maneuvers">Maneuvers & Transfers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-section="animation">🎬 Real-time Animation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-section="ground-track">Ground Track Map</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-section="mission-planning">✈️ Mission Planning</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-section="perturbations">High-Fidelity Dynamics</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-section="propagators">Propagators</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-section="citations">References</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main Content Area -->
+            <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <!-- Home Section -->
+                <section id="home" class="section active">
+                    <div class="jumbotron">
+                        <h1 class="display-4">Welcome to Orbital Dynamics</h1>
+                        <p class="lead">An interactive educational platform for understanding orbital mechanics, TLE data, and space mission planning.</p>
+                        <hr class="my-4">
+                        <p>This website is designed for space enthusiasts, engineers, and students preparing for careers in flight operations and space mission planning.</p>
+                        <p class="lead">
+                            <button class="btn btn-primary btn-lg" onclick="switchSection('tle')">Get Started</button>
+                        </p>
+                    </div>
+
+                    <div class="row mt-5">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">📡 TLE Data</h5>
+                                    <p class="card-text">Understand Two-Line Element sets and real-time satellite tracking</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">🔄 Conversions</h5>
+                                    <p class="card-text">Convert between state vectors and Keplerian orbital elements</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">✈️ Maneuvers</h5>
+                                    <p class="card-text">Calculate Hohmann transfers, plane changes, and orbital maneuvers</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TLE Section -->
+                <section id="tle" class="section">
+                    <h2>Understanding Two-Line Element (TLE) Sets</h2>
+                    <p>TLE data is the standard format for orbital element exchange used by NORAD.</p>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>Parse TLE</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="tle-form">
+                                <div class="form-group mb-3">
+                                    <label for="tle-name">Satellite Name:</label>
+                                    <input type="text" class="form-control" id="tle-name" placeholder="e.g., ISS" value="ISS">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="tle-line1">Line 1:</label>
+                                    <input type="text" class="form-control" id="tle-line1" placeholder="1 25544U..." 
+                                           value="1 25544U 98067A   21348.58768519  .00008803  00000-0  18458-3 0  9991">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="tle-line2">Line 2:</label>
+                                    <input type="text" class="form-control" id="tle-line2" placeholder="2 25544..." 
+                                           value="2 25544  51.6439 260.8917 0002550  37.5917 322.5653 15.49207881317741">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Parse TLE</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div id="tle-results" class="card" style="display:none;">
+                        <div class="card-header">
+                            <h5>Parsed Results</h5>
+                        </div>
+                        <div class="card-body">
+                            <pre id="tle-output"></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Keplerian Section -->
+                <section id="keplerian" class="section">
+                    <h2>State Vectors ↔ Keplerian Elements</h2>
+                    <p>Convert between Cartesian state vectors and orbital elements.</p>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>Interactive Orbital Element Sliders</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="cesium-container" style="width: 100%; height: 500px;"></div>
+                            
+                            <div class="mt-4">
+                                <h6>Adjust Orbital Elements:</h6>
+                                
+                                <div class="mb-3">
+                                    <label for="slider-a">Semi-major Axis (a): <span id="value-a">7000</span> km</label>
+                                    <input type="range" class="form-range" id="slider-a" min="6500" max="42000" value="7000">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="slider-e">Eccentricity (e): <span id="value-e">0.0</span></label>
+                                    <input type="range" class="form-range" id="slider-e" min="0" max="0.9" step="0.01" value="0">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="slider-i">Inclination (i): <span id="value-i">0</span>°</label>
+                                    <input type="range" class="form-range" id="slider-i" min="0" max="180" value="0">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="slider-raan">RAAN (Ω): <span id="value-raan">0</span>°</label>
+                                    <input type="range" class="form-range" id="slider-raan" min="0" max="360" value="0">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="slider-aop">Argument of Perigee (ω): <span id="value-aop">0</span>°</label>
+                                    <input type="range" class="form-range" id="slider-aop" min="0" max="360" value="0">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="slider-nu">True Anomaly (ν): <span id="value-nu">0</span>°</label>
+                                    <input type="range" class="form-range" id="slider-nu" min="0" max="360" value="0">
+                                </div>
+                            </div>
+                            
+                            <div id="keplerian-info" class="mt-4 p-3 bg-light rounded">
+                                <h6>Orbital Information:</h6>
+                                <pre id="keplerian-output"></pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Orbit Types Section -->
+                <section id="orbit-types" class="section">
+                    <h2>Choose Your Fighter: Orbital Types</h2>
+                    <p>Explore the major orbital types, their characteristics, and real spacecraft examples.</p>
+                    
+                    <div id="orbits-container" class="row">
+                        <!-- Dynamically populated -->
+                    </div>
+                </section>
+
+                <!-- Maneuvers Section -->
+                <section id="maneuvers" class="section">
+                    <h2>Maneuvers & Orbital Transfers</h2>
+                    <p>Calculate Hohmann transfers, bi-elliptic transfers, and plane changes.</p>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>Hohmann Transfer Calculator</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="hohmann-form">
+                                <div class="form-group mb-3">
+                                    <label for="hohmann-r1">Initial Orbit Radius (km):</label>
+                                    <input type="number" class="form-control" id="hohmann-r1" value="6778" min="6378" step="1">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="hohmann-r2">Final Orbit Radius (km):</label>
+                                    <input type="number" class="form-control" id="hohmann-r2" value="42164" min="6378" step="1">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Calculate</button>
+                            </form>
+                            <div id="hohmann-results" class="mt-3" style="display:none;">
+                                <pre id="hohmann-output"></pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Real-time Animation Section [NEW] -->
+                <section id="animation" class="section">
+                    <h2>🎬 Real-time Orbit Animation</h2>
+                    <p>Watch satellite orbits unfold with real-time propagation and animation.</p>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>Orbit Animation Controls</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="animation-loading" style="display:none;" class="alert alert-info">
+                                Loading animation frames...
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="animation-orbits">Number of Orbits:</label>
+                                <input type="number" class="form-control" id="animation-orbits" min="0.5" max="10" step="0.5" value="1">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <button class="btn btn-primary" onclick="requestAndPlayAnimation({initial_state: {semi_major_axis_km: 7000, eccentricity: 0.001, inclination_deg: 51.6, raan_deg: 0, arg_perigee_deg: 0, true_anomaly_deg: 0}, num_orbits: parseFloat(document.getElementById('animation-orbits').value)})">
+                                    Start Animation
+                                </button>
+                            </div>
+                            
+                            <div id="animation-controls" style="display:none;" class="mt-4 p-3 bg-light rounded">
+                                <h6>Animation Controls:</h6>
+                                <div class="btn-group" role="group" style="margin-right: 10px;">
+                                    <button id="btn-play" class="btn btn-sm btn-success" onclick="playAnimation()">▶ Play</button>
+                                    <button id="btn-pause" class="btn btn-sm btn-warning" onclick="pauseAnimation()">⏸ Pause</button>
+                                    <button id="btn-resume" class="btn btn-sm btn-info" onclick="resumeAnimation()">▶ Resume</button>
+                                    <button id="btn-stop" class="btn btn-sm btn-danger" onclick="stopAnimation()">⏹ Stop</button>
+                                </div>
+                                
+                                <div style="margin-top: 10px;">
+                                    <label>Speed:</label>
+                                    <select class="form-select form-select-sm d-inline-block" style="width: auto;" onchange="setAnimationSpeed(this.value)">
+                                        <option value="0.5">0.5x</option>
+                                        <option value="1" selected>1x</option>
+                                        <option value="2">2x</option>
+                                        <option value="4">4x</option>
+                                    </select>
+                                    <span id="speed-label" style="margin-left: 10px;">1x</span>
+                                </div>
+                            </div>
+                            
+                            <div id="animation-info" class="mt-4 p-3 bg-light rounded" style="display:none;">
+                                <!-- Frame info displays here -->
+                            </div>
+                            
+                            <div class="mt-3">
+                                <button class="btn btn-outline-secondary btn-sm" onclick="exportAnimationFrames()">📥 Export Frames (CSV)</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Ground Track Section [ENHANCED] -->
+                <section id="ground-track" class="section">
+                    <h2>Ground Track & 2D Map Visualization</h2>
+                    <p>Visualize satellite ground tracks with mathematically justified map projections (not Mercator).</p>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>2D Ground Track Map</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="projection-select">Map Projection:</label>
+                                <select id="projection-select" class="form-select">
+                                    <option value="sinusoidal">Sinusoidal (NASA Standard, Equal-Area)</option>
+                                    <option value="mollweide">Mollweide (Whole-Earth Elliptical)</option>
+                                    <option value="equirectangular">Equirectangular (Simple Cylindrical)</option>
+                                    <option value="lambert_azimuthal">Lambert Azimuthal (Polar-Optimized)</option>
+                                </select>
+                            </div>
+                            
+                            <div id="map-loading" style="display:none;" class="alert alert-info">
+                                Loading ground track...
+                            </div>
+                            
+                            <div id="ground-track-map-canvas" style="width: 100%; position: relative;">
+                                <!-- Canvas will be inserted here -->
+                            </div>
+                            
+                            <div id="map-info" class="mt-3 p-3 bg-light rounded"></div>
+                            
+                            <div class="mt-3">
+                                <button class="btn btn-outline-secondary btn-sm" onclick="exportMapImage()">📸 Export Map (PNG)</button>
+                                <button class="btn btn-outline-secondary btn-sm" onclick="exportGroundTrackGeoJSON()">📍 Export GeoJSON</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Mission Planning Section [NEW] -->
+                <section id="mission-planning" class="section">
+                    <h2>✈️ Mission Planning & Launch Window Optimization</h2>
+                    <p>Plan missions, compute launch windows, and analyze perturbation effects on your spacecraft.</p>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5>Orbital Parameters</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form id="mission-planning-form">
+                                        <div class="mb-3">
+                                            <label for="mission-sma">Semi-major Axis (km):</label>
+                                            <input type="number" class="form-control" id="mission-sma" value="7000" step="100" min="6371">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="mission-ecc">Eccentricity:</label>
+                                            <input type="number" class="form-control" id="mission-ecc" value="0.001" step="0.001" min="0" max="1">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="mission-incl">Inclination (°):</label>
+                                            <input type="number" class="form-control" id="mission-incl" value="51.6" step="0.1" min="0" max="180">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="mission-raan">RAAN (°):</label>
+                                            <input type="number" class="form-control" id="mission-raan" value="0" step="1" min="0" max="360">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="mission-aop">Argument of Perigee (°):</label>
+                                            <input type="number" class="form-control" id="mission-aop" value="0" step="1" min="0" max="360">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="mission-nu">True Anomaly (°):</label>
+                                            <input type="number" class="form-control" id="mission-nu" value="0" step="1" min="0" max="360">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5>Spacecraft Properties</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label for="spacecraft-mass">Spacecraft Mass (kg):</label>
+                                        <input type="number" class="form-control" id="spacecraft-mass" value="1000" step="100" min="100">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="ballistic-coefficient">Ballistic Coefficient (B*):</label>
+                                        <input type="number" class="form-control" id="ballistic-coefficient" value="0.01" step="0.001" min="0.001">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="mission-summary" class="card">
+                                <!-- Summary displays here -->
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5>Launch Window Computation</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label for="launch-site-lat">Launch Site Latitude (°):</label>
+                                        <input type="number" class="form-control" id="launch-site-lat" value="28.5" step="0.1" min="-90" max="90">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="launch-site-lon">Launch Site Longitude (°):</label>
+                                        <input type="number" class="form-control" id="launch-site-lon" value="-80.5" step="0.1" min="-180" max="180">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="target-inclination">Target Inclination (°):</label>
+                                        <input type="number" class="form-control" id="target-inclination" value="51.6" step="0.1" min="0" max="180">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="start-date">Start Date:</label>
+                                        <input type="date" class="form-control" id="start-date">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="num-days">Number of Days to Analyze:</label>
+                                        <input type="number" class="form-control" id="num-days" value="7" step="1" min="1" max="30">
+                                    </div>
+                                    <button id="compute-windows-btn" class="btn btn-primary">Compute Windows</button>
+                                </div>
+                            </div>
+                            
+                            <div id="launch-windows-loading" style="display:none;" class="alert alert-info">
+                                Computing launch windows...
+                            </div>
+                            
+                            <div id="launch-windows-results" class="card mt-3">
+                                <!-- Results display here -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>High-Fidelity Perturbation Analysis</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label for="prop-time-hours">Propagation Time (hours):</label>
+                                        <input type="number" class="form-control" id="prop-time-hours" value="1" step="0.5" min="0.1">
+                                    </div>
+                                    <button id="analyze-perturbations-btn" class="btn btn-primary">Analyze Perturbations (J2+J3+J4+Drag)</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div id="perturbations-loading" style="display:none;" class="alert alert-info">
+                                Analyzing perturbations...
+                            </div>
+                            
+                            <div id="perturbations-results" class="card">
+                                <!-- Results display here -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <button id="export-mission-btn" class="btn btn-outline-secondary">📥 Export Mission Plan (JSON)</button>
+                    </div>
+                </section>
+
+                <!-- Perturbations Section -->
+                <section id="perturbations" class="section">
+                    <h2>High-Fidelity Orbital Dynamics</h2>
+                    <p>Advanced perturbation analysis with J2, J3, J4, and atmospheric drag effects.</p>
+                    
+                    <div class="alert alert-info">
+                        <h5>Advanced Perturbation Effects</h5>
+                        <p><strong>J2 (Oblateness):</strong> Earth's equatorial bulge causing RAAN precession (~0.5-1.5°/day for LEO).</p>
+                        <p><strong>J3 (Pear Shape):</strong> Secondary perturbation affecting argument of perigee.</p>
+                        <p><strong>J4 (Quadrupole):</strong> Higher-order effect, typically smaller than J3.</p>
+                        <p><strong>Atmospheric Drag:</strong> Critical for LEO; depends on solar cycle (F10.7 index) and spacecraft properties.</p>
+                    </div>
+                    
+                    <div id="comparative-metrics" class="card mt-4">
+                        <!-- Comparison results display here -->
+                    </div>
+                </section>
+
+                <!-- Propagators Section -->
+                <section id="propagators" class="section">
+                    <h2>Orbital Propagators</h2>
+                    <p>Compare different propagation methods: Two-Body, J2-Perturbed, and SGP4.</p>
+                    
+                    <div class="alert alert-info">
+                        <h5>Propagator Comparison</h5>
+                        <p><strong>Two-Body Model:</strong> Assumes spherical central body, no perturbations. Good for education but accumulating errors.</p>
+                        <p><strong>J2 Model:</strong> Includes Earth oblateness effects (J2 term). Linearized perturbations, medium-term accuracy.</p>
+                        <p><strong>SGP4/SDP4:</strong> NORAD standard TLE-based propagator. Most accurate for LEO/GEO, industry standard.</p>
+                    </div>
+                </section>
+
+                <!-- Citations Section -->
+                <section id="citations" class="section">
+                    <h2>References & Citations</h2>
+                    <p>All numerical values and orbital mechanics principles are sourced from:</p>
+                    
+                    <h5 class="mt-4">Primary References</h5>
+                    <ul>
+                        <li><strong>Curtis, H. D. (2013).</strong> <em>Orbital Mechanics for Engineering Students</em> (3rd ed.). Butterworth-Heinemann. ISBN 978-0-08-102133-0</li>
+                        <li><strong>Vallado, D. A., Crawford, P., Hujsak, R., & Kelso, T. S. (2006).</strong> "Revisiting Spacetrack Report #3: Rev 1". AIAA Paper 2006-6753.</li>
+                        <li><strong>NORAD Two-Line Element Set Format.</strong> <a href="https://celestrak.org/NORAD/documentation/tle-fmt.php" target="_blank">https://celestrak.org/NORAD/documentation/tle-fmt.php</a></li>
+                    </ul>
+                    
+                    <h5 class="mt-4">Additional References</h5>
+                    <ul>
+                        <li>SGP4 Library: <a href="https://pypi.org/project/sgp4/" target="_blank">https://pypi.org/project/sgp4/</a></li>
+                        <li>CesiumJS Documentation: <a href="https://cesium.com/platform/cesiumjs/" target="_blank">https://cesium.com/platform/cesiumjs/</a></li>
+                        <li>NASA Satellite Database: <a href="https://directory.eoportal.org/" target="_blank">https://directory.eoportal.org/</a></li>
+                    </ul>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Firebase Configuration & Auth (before app.js) -->
+    <script src="firebase-config.js"></script>
+    <script src="firebase-auth.js"></script>
+    
+    <!-- Application Scripts -->
+    <script src="app.js"></script>
+    <script src="animation.js"></script>
+    <script src="mission-planning.js"></script>
+    <script src="projections.js"></script>
+</body>
+</html>

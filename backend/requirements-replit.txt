@@ -1,0 +1,27 @@
+# Minimal dependencies optimized for Replit free tier
+# This file has fewer/lighter packages than the main requirements.txt
+# Use this with: pip install -r requirements-replit.txt
+
+# Core framework
+Flask==3.0.0
+Flask-CORS==4.0.0
+
+# Math/science libraries (NASA-grade orbital mechanics)
+numpy==1.24.3
+scipy==1.10.1
+
+# SGP4 TLE propagator (industry standard)
+sgp4==2.23
+
+# Production server (gunicorn)
+gunicorn==20.1.0
+
+# Utilities
+python-dateutil==2.8.2
+
+# Note: NOT included (to save memory)
+# - Flask-Caching (redis would require extra server)
+# - sqlalchemy (database conn pooling - not needed for small demos)
+# - psycopg2-binary (PostgreSQL driver)
+# - prometheus-client (monitoring)
+# - Werkzeug (already in Flask)

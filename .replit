@@ -1,0 +1,12 @@
+# Replit configuration for Orbital Dynamics Platform
+# Place this file at project root: .replit
+
+run = "python backend/api/app.py"
+
+[env]
+PYTHONUNBUFFERED = "1"
+FLASK_ENV = "production"
+LOG_LEVEL = "warning"
+
+[packager]
+language = "python3"

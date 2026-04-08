@@ -1,7 +1,7 @@
 {
   "_metadata": {
     "description": "Pre-computed ground track data for major satellites and access window analysis",
-    "computation_method": "Two-body + J2 secular perturbation propagation using SGP4-equivalent algorithm",
+    "computation_method": "Simplified two-body + J2 secular perturbation model (not full SGP4). Positions are approximate; suitable for educational visualisation.",
     "sources": [
       "TLE epochs from CelesTrak (https://celestrak.org) — 2026-04-08",
       "Ground station coordinates from NASA (https://www.nasa.gov/directorates/heo/scan/services/networks/txt_gsfc.html)",

@@ -1,0 +1,383 @@
+{
+  "_metadata": {
+    "description": "Historical and current spaceflight mission database",
+    "sources": [
+      "NASA NSSDCA Mission Catalog — https://nssdc.gsfc.nasa.gov/nmc/",
+      "NASA SP-4009 — The NASA Historical Data Book",
+      "ESA Mission Database — https://www.esa.int/Enabling_Support/Operations/Current_missions",
+      "SpaceX Mission Archive — https://www.spacex.com/launches/",
+      "Astronautix Encyclopedia — http://www.astronautix.com",
+      "Molniya orbit data from IAU/ITU filings"
+    ],
+    "retrieval_date": "2026-04-08",
+    "notes": [
+      "Orbital parameters are as-flown; some values are nominal from mission design documents.",
+      "Delta-v budgets are approximations from published sources.",
+      "Dates in UTC unless otherwise noted."
+    ]
+  },
+  "missions": [
+    {
+      "id": "apollo_11",
+      "name": "Apollo 11",
+      "program": "Apollo",
+      "agency": "NASA",
+      "country": "USA",
+      "launch_date": "1969-07-16T13:32:00Z",
+      "landing_date": "1969-07-24",
+      "status": "Completed",
+      "crew": ["Neil A. Armstrong", "Edwin E. Aldrin Jr.", "Michael Collins"],
+      "launch_vehicle": "Saturn V SA-506",
+      "launch_site": "Kennedy Space Center, LC-39A, Florida",
+      "orbital_parameters": {
+        "parking_orbit_altitude_km": 190,
+        "parking_orbit_inclination_deg": 32.5,
+        "translunar_injection_dv_km_s": 3.152,
+        "lunar_orbit_altitude_km": 111,
+        "lunar_orbit_period_minutes": 119
+      },
+      "mission_summary": "First crewed Moon landing. Armstrong and Aldrin landed in Mare Tranquillitatis (Sea of Tranquility) at 0°41'15\"N 23°26'E on July 20, 1969 at 20:17 UTC.",
+      "delta_v_budget_km_s": {
+        "launch_to_leo": 9.35,
+        "tli": 3.15,
+        "loi": 0.90,
+        "descent": 2.05,
+        "ascent": 1.87,
+        "tei": 0.82,
+        "total_approx": 18.14
+      },
+      "duration_days": 8.13,
+      "sources": ["NASA SP-4009", "NASA Apollo 11 Mission Report MSC-00171"]
+    },
+    {
+      "id": "apollo_13",
+      "name": "Apollo 13",
+      "program": "Apollo",
+      "agency": "NASA",
+      "country": "USA",
+      "launch_date": "1970-04-11T19:13:00Z",
+      "landing_date": "1970-04-17",
+      "status": "Aborted — safe return (successful failure)",
+      "crew": ["James A. Lovell Jr.", "John L. Swigert Jr.", "Fred W. Haise Jr."],
+      "launch_vehicle": "Saturn V SA-508",
+      "launch_site": "Kennedy Space Center, LC-39A, Florida",
+      "orbital_parameters": {
+        "parking_orbit_altitude_km": 190,
+        "parking_orbit_inclination_deg": 32.5,
+        "free_return_trajectory": true,
+        "lunar_closest_approach_km": 254
+      },
+      "mission_summary": "Service Module oxygen tank rupture at ~55 h 55 min MET. Crew used Lunar Module Aquarius as lifeboat. Free-return trajectory executed using LM descent engine (PC+2 burn) to target Earth reentry corridor.",
+      "delta_v_budget_km_s": {
+        "launch_to_leo": 9.35,
+        "tli": 3.15,
+        "pc_plus_2_burn": 0.262,
+        "mid_course_corrections": 0.028
+      },
+      "duration_days": 5.95,
+      "sources": ["NASA Apollo 13 Mission Report MSC-02680", "Lovell & Kluger (1994) Lost Moon"]
+    },
+    {
+      "id": "sts_1",
+      "name": "STS-1 Columbia",
+      "program": "Space Shuttle",
+      "agency": "NASA",
+      "country": "USA",
+      "launch_date": "1981-04-12T12:00:03Z",
+      "landing_date": "1981-04-14",
+      "status": "Completed",
+      "crew": ["John W. Young", "Robert L. Crippen"],
+      "launch_vehicle": "Space Shuttle Columbia OV-102",
+      "launch_site": "Kennedy Space Center, LC-39A, Florida",
+      "orbital_parameters": {
+        "altitude_km": 222,
+        "inclination_deg": 40.3,
+        "eccentricity": 0.004,
+        "period_minutes": 88.0
+      },
+      "mission_summary": "First Space Shuttle orbital flight. Two-day test flight to verify Columbia's systems. First crewed American spacecraft launch from Pad 39A.",
+      "duration_days": 2.26,
+      "sources": ["NASA STS-1 Press Kit", "Heppenheimer (2002) The Space Shuttle Decision"]
+    },
+    {
+      "id": "sts_51l",
+      "name": "STS-51-L Challenger",
+      "program": "Space Shuttle",
+      "agency": "NASA",
+      "country": "USA",
+      "launch_date": "1986-01-28T16:38:00Z",
+      "landing_date": null,
+      "status": "Mission failure — crew lost",
+      "crew": [
+        "Francis R. Scobee", "Michael J. Smith", "Judith A. Resnik",
+        "Ellison S. Onizuka", "Ronald E. McNair", "Gregory B. Jarvis",
+        "Sharon Christa McAuliffe"
+      ],
+      "launch_vehicle": "Space Shuttle Challenger OV-099",
+      "launch_site": "Kennedy Space Center, LC-39B, Florida",
+      "orbital_parameters": {
+        "planned_altitude_km": 296,
+        "planned_inclination_deg": 28.5
+      },
+      "mission_summary": "Challenger broke apart 73 seconds after launch due to O-ring failure in right SRB. Mission had been planned to deploy TDRS-B and Spartan-Halley comet observer. McAuliffe would have been first teacher in space.",
+      "duration_days": 0.00085,
+      "sources": ["Presidential Commission on the Space Shuttle Challenger Accident (Rogers Commission) Report, 1986", "Feynman (1988) What Do You Care What Other People Think?"]
+    },
+    {
+      "id": "mir_eos",
+      "name": "Mir Space Station (End of Service)",
+      "program": "Mir",
+      "agency": "Roscosmos",
+      "country": "Russia / Soviet Union",
+      "launch_date": "1986-02-19T21:28:23Z",
+      "landing_date": "2001-03-23",
+      "status": "Completed — Deorbited",
+      "orbital_parameters": {
+        "altitude_km": 385,
+        "inclination_deg": 51.6,
+        "eccentricity": 0.0005,
+        "period_minutes": 92.2
+      },
+      "mission_summary": "Mir was the world's first continuously inhabited long-term research station. Occupied for 4 594 days (12.5 years) total. Successfully deorbited March 23, 2001, with debris landing in the South Pacific.",
+      "duration_days": 5510,
+      "sources": ["Harland (1997) The Mir Space Station", "NASA SP-2000-4527"]
+    },
+    {
+      "id": "iss_expedition1",
+      "name": "ISS Expedition 1",
+      "program": "International Space Station",
+      "agency": "NASA / Roscosmos",
+      "country": "USA / Russia",
+      "launch_date": "2000-10-31T07:52:47Z",
+      "landing_date": "2001-03-21",
+      "status": "Completed",
+      "crew": ["William M. Shepherd (CDR)", "Yuri P. Gidzenko (Soyuz CDR)", "Sergei K. Krikalev (Flight Engineer)"],
+      "launch_vehicle": "Soyuz TM-31",
+      "launch_site": "Baikonur Cosmodrome, Kazakhstan, Site 1/5",
+      "orbital_parameters": {
+        "altitude_km": 386,
+        "inclination_deg": 51.6,
+        "eccentricity": 0.0004,
+        "period_minutes": 92.2,
+        "raan_deg": 210.0
+      },
+      "mission_summary": "First permanent crew of the ISS. Docked Soyuz TM-31 to Zvezda module. Inaugural continuous human presence aboard ISS began November 2, 2000 — a milestone maintained ever since.",
+      "duration_days": 140.6,
+      "sources": ["NASA HEOMD ISS Program Science — Expedition 1 summary"]
+    },
+    {
+      "id": "iss_expedition68",
+      "name": "ISS Expedition 68",
+      "program": "International Space Station",
+      "agency": "NASA / Roscosmos / ESA / JAXA",
+      "country": "Multinational",
+      "launch_date": "2022-09-21T21:54:00Z",
+      "landing_date": "2023-03-30",
+      "status": "Completed",
+      "crew": [
+        "Nicole Mann (NASA, CDR)", "Josh Cassada (NASA)", "Koichi Wakata (JAXA)",
+        "Anna Kikina (Roscosmos)", "Frank Rubio (NASA)", "Sergei Prokopyev (Roscosmos)",
+        "Dmitri Petelin (Roscosmos)"
+      ],
+      "launch_vehicle": "Crew Dragon Endurance (SpX-25) & Soyuz MS-22",
+      "launch_site": "KSC LC-39A & Baikonur Site 1",
+      "orbital_parameters": {
+        "altitude_km": 408,
+        "inclination_deg": 51.64,
+        "eccentricity": 0.0003,
+        "period_minutes": 92.9
+      },
+      "mission_summary": "First Native American woman (Mann) to serve as a space station commander. Rubio conducted EVAs. Soyuz MS-22 suffered coolant leak; crew returned on Soyuz MS-23 (uncrewed ferry).",
+      "duration_days": 186,
+      "sources": ["NASA ISS Program — Expedition 68 summary", "SpaceX Mission Updates"]
+    },
+    {
+      "id": "spacex_dm2",
+      "name": "SpaceX Demo-2 (Crew Dragon Endeavour)",
+      "program": "Commercial Crew Program",
+      "agency": "NASA / SpaceX",
+      "country": "USA",
+      "launch_date": "2020-05-30T19:22:45Z",
+      "landing_date": "2020-08-02",
+      "status": "Completed",
+      "crew": ["Douglas G. Hurley", "Robert L. Behnken"],
+      "launch_vehicle": "Falcon 9 Block 5 (B1058-1)",
+      "launch_site": "Kennedy Space Center, LC-39A, Florida",
+      "orbital_parameters": {
+        "altitude_km": 408,
+        "inclination_deg": 51.64,
+        "eccentricity": 0.0003,
+        "period_minutes": 92.9
+      },
+      "mission_summary": "First crewed operational test of SpaceX Crew Dragon. First crewed US orbital launch from American soil since STS-135 in 2011. Docked to ISS for 64 days; splashdown in Gulf of Mexico.",
+      "duration_days": 63.9,
+      "sources": ["NASA CCP Demo-2 Press Kit", "SpaceX Demo-2 Mission Overview"]
+    },
+    {
+      "id": "spacex_inspiration4",
+      "name": "Inspiration4",
+      "program": "Commercial Spaceflight",
+      "agency": "SpaceX (private)",
+      "country": "USA",
+      "launch_date": "2021-09-15T00:02:56Z",
+      "landing_date": "2021-09-18",
+      "status": "Completed",
+      "crew": [
+        "Jared Isaacman (CDR)", "Hayley Arceneaux", "Christopher Sembroski", "Sian Proctor"
+      ],
+      "launch_vehicle": "Falcon 9 Block 5 (B1061-2)",
+      "launch_site": "Kennedy Space Center, LC-39A, Florida",
+      "orbital_parameters": {
+        "altitude_km": 575,
+        "inclination_deg": 51.6,
+        "eccentricity": 0.0005,
+        "period_minutes": 96.0
+      },
+      "mission_summary": "First all-civilian orbital spaceflight. Raised orbit to 575 km — highest crewed altitude since Hubble servicing missions. Raised $240 M for St. Jude Children's Research Hospital.",
+      "duration_days": 3.02,
+      "sources": ["SpaceX Inspiration4 Mission Overview", "Isaacman et al. (2022) NEJM special issue"]
+    },
+    {
+      "id": "spacex_crew5",
+      "name": "SpaceX Crew-5",
+      "program": "Commercial Crew Program",
+      "agency": "NASA / SpaceX",
+      "country": "USA / Russia / Japan",
+      "launch_date": "2022-10-05T16:00:00Z",
+      "landing_date": "2023-03-11",
+      "status": "Completed",
+      "crew": [
+        "Nicole Mann (NASA)", "Josh Cassada (NASA)",
+        "Koichi Wakata (JAXA)", "Anna Kikina (Roscosmos)"
+      ],
+      "launch_vehicle": "Falcon 9 Block 5 (B1077-1) — Crew Dragon Endurance",
+      "launch_site": "Kennedy Space Center, LC-39A, Florida",
+      "orbital_parameters": {
+        "altitude_km": 408,
+        "inclination_deg": 51.64,
+        "eccentricity": 0.0003,
+        "period_minutes": 92.9
+      },
+      "mission_summary": "ISS Expedition 68 commercial crew launch. First flight under NASA–Roscosmos crew exchange agreement (Kikina on Crew Dragon; US astronaut Rubio on Soyuz MS-22).",
+      "duration_days": 157,
+      "sources": ["NASA CCP Crew-5 Mission Page", "SpaceX Mission Archive"]
+    },
+    {
+      "id": "tianhe",
+      "name": "Tianhe (Chinese Space Station Core Module)",
+      "program": "Chinese Space Station (CSS/Tiangong)",
+      "agency": "CNSA",
+      "country": "China",
+      "launch_date": "2021-04-29T11:23:15Z",
+      "landing_date": null,
+      "status": "Operational",
+      "launch_vehicle": "Long March 5B Y2",
+      "launch_site": "Wenchang Space Launch Center, LC-101",
+      "orbital_parameters": {
+        "altitude_km": 390,
+        "inclination_deg": 41.5,
+        "eccentricity": 0.001,
+        "period_minutes": 92.1
+      },
+      "mission_summary": "Core module of China's permanent space station. Followed by Wentian and Mengtian experimental modules in 2022. China's third space station after Tiangong-1 and Tiangong-2.",
+      "sources": ["CNSA official release", "Zak (2021) RussianSpaceWeb CSS summary"]
+    },
+    {
+      "id": "shenzhou15",
+      "name": "Shenzhou-15",
+      "program": "Shenzhou",
+      "agency": "CNSA",
+      "country": "China",
+      "launch_date": "2022-11-29T15:08:00Z",
+      "landing_date": "2023-06-04",
+      "status": "Completed",
+      "crew": ["Fei Junlong (CDR)", "Deng Qingming", "Zhang Lu"],
+      "launch_vehicle": "Long March 2F Y15",
+      "launch_site": "Jiuquan Satellite Launch Center, LC-43/921",
+      "orbital_parameters": {
+        "altitude_km": 390,
+        "inclination_deg": 41.5,
+        "eccentricity": 0.001,
+        "period_minutes": 92.1
+      },
+      "mission_summary": "Sixth crewed Chinese space station mission. First handover between two concurrent Chinese crews (Shenzhou-14 and Shenzhou-15). Conducted record 4 EVAs.",
+      "duration_days": 186,
+      "sources": ["CNSA press releases", "China Aerospace Science and Technology Corporation (CASC) updates"]
+    },
+    {
+      "id": "new_shepard_ns18",
+      "name": "Blue Origin NS-18",
+      "program": "New Shepard",
+      "agency": "Blue Origin",
+      "country": "USA",
+      "launch_date": "2021-10-13T14:49:00Z",
+      "landing_date": "2021-10-13",
+      "status": "Completed",
+      "crew": [
+        "Audrey Powers", "William Shatner", "Chris Boshuizen", "Glen de Vries"
+      ],
+      "launch_vehicle": "New Shepard RSS First Step",
+      "launch_site": "Blue Origin Launch Site One, Van Horn, Texas",
+      "orbital_parameters": {
+        "apogee_km": 107,
+        "suborbital": true,
+        "velocity_km_s": 3.0,
+        "flight_time_minutes": 10.3
+      },
+      "mission_summary": "Shatner (90) became oldest person in space. Four crew enjoyed ~4 minutes of microgravity above Kármán line (100 km). New Shepard capsule parachuted to desert; booster landed autonomously.",
+      "duration_days": 0.0072,
+      "sources": ["Blue Origin Mission Overview", "FAA commercial spaceflight records"]
+    },
+    {
+      "id": "artemis1",
+      "name": "Artemis I (uncrewed)",
+      "program": "Artemis",
+      "agency": "NASA",
+      "country": "USA",
+      "launch_date": "2022-11-16T06:47:44Z",
+      "landing_date": "2022-12-11",
+      "status": "Completed",
+      "crew": [],
+      "launch_vehicle": "Space Launch System (SLS) Block 1 / Orion MPCV",
+      "launch_site": "Kennedy Space Center, LC-39B, Florida",
+      "orbital_parameters": {
+        "tli": true,
+        "lunar_orbit_type": "Distant Retrograde Orbit (DRO)",
+        "dro_altitude_km": 64000,
+        "dro_period_days": 14,
+        "earth_reentry_speed_km_s": 11.0
+      },
+      "mission_summary": "First integrated flight of SLS + Orion. Uncrewed 25-day mission entered a distant retrograde orbit around the Moon (70 000 km from lunar surface), then returned to Earth. Splashdown in Pacific Dec 11 at 17:40 UTC.",
+      "duration_days": 25.5,
+      "delta_v_budget_km_s": {
+        "sls_ascent": 9.35,
+        "tli": 3.15,
+        "dro_insertion": 0.26,
+        "return": 0.27
+      },
+      "sources": ["NASA Artemis I Press Kit", "NASA GSFC Mission Design Document LID-GSFC-0076"]
+    },
+    {
+      "id": "voyager1",
+      "name": "Voyager 1 (Interstellar)",
+      "program": "Voyager",
+      "agency": "NASA/JPL",
+      "country": "USA",
+      "launch_date": "1977-09-05T12:56:00Z",
+      "landing_date": null,
+      "status": "Active — Interstellar space",
+      "launch_vehicle": "Titan IIIE/Centaur TC-7",
+      "launch_site": "Cape Canaveral AFS, LC-41, Florida",
+      "orbital_parameters": {
+        "orbit_type": "Heliocentric escape / interstellar",
+        "distance_from_sun_au": 163,
+        "velocity_km_s": 17.0,
+        "declination_deg": 12.4,
+        "ecliptic_inclination_deg": 35.0,
+        "heliopause_crossing": "2012-08-25"
+      },
+      "mission_summary": "Encountered Jupiter (1979) and Saturn (1980). Used gravity assists to achieve escape velocity. Crossed the heliopause in August 2012, becoming the first human-made object to enter interstellar space. As of 2026, 163 AU from the Sun.",
+      "sources": ["NASA JPL Voyager Mission Status https://voyager.jpl.nasa.gov/", "Stone et al. (2013) Science 341:1460"]
+    }
+  ]
+}

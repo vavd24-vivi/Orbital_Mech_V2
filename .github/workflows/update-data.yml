@@ -1,0 +1,39 @@
+name: Weekly Orbital Data Refresh
+
+on:
+  schedule:
+    # Run every Monday at 04:00 UTC
+    - cron: "0 4 * * 1"
+  # Allow manual trigger
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy requests
+
+      - name: Regenerate orbital data files
+        run: python scripts/generate_orbital_data.py --fetch-live
+
+      - name: Commit updated data
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/data/ public/data-config.js
+          git diff --staged --quiet || git commit -m "chore: weekly orbital data refresh $(date -u +%Y-%m-%d)"
+          git push

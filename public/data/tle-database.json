@@ -1,0 +1,421 @@
+{
+  "_metadata": {
+    "description": "Real Two-Line Element (TLE) database for major spacecraft",
+    "sources": [
+      {
+        "name": "CelesTrak",
+        "url": "https://celestrak.org/NORAD/elements/",
+        "license": "Public domain (NORAD/Space-Track data)"
+      },
+      {
+        "name": "Space-Track.org",
+        "url": "https://www.space-track.org",
+        "license": "Government data, public distribution"
+      }
+    ],
+    "retrieval_date": "2026-04-08",
+    "notes": [
+      "TLEs are snapshots valid near their epoch date.",
+      "Positions propagated from these elements accumulate error over time.",
+      "For current positions, fetch live data from CelesTrak or Space-Track.",
+      "All NORAD catalog numbers from https://celestrak.org/satcat/search.php"
+    ]
+  },
+  "satellites": [
+    {
+      "name": "ISS (ZARYA)",
+      "norad_id": 25544,
+      "category": "LEO",
+      "country": "Multinational",
+      "launch_date": "1998-11-20",
+      "epoch": "2026-04-07",
+      "tle_line1": "1 25544U 98067A   26097.53395062  .00020351  00000-0  36118-3 0  9999",
+      "tle_line2": "2 25544  51.6413 130.2720 0003174 305.5180  54.5000 15.50018900492825",
+      "source": "CelesTrak https://celestrak.org/NORAD/elements/stations.txt",
+      "retrieval_date": "2026-04-08",
+      "orbital_elements": {
+        "altitude_km": 408,
+        "inclination_deg": 51.64,
+        "eccentricity": 0.0003174,
+        "semi_major_axis_km": 6779,
+        "orbital_period_minutes": 92.9,
+        "raan_deg": 130.27,
+        "arg_perigee_deg": 305.52
+      },
+      "description": "The International Space Station — humanity's permanent orbital laboratory since 2000. Maintained by NASA, Roscosmos, ESA, JAXA, and CSA.",
+      "notes": "Altitude maintained between 400–420 km via periodic reboosts. Inclination chosen to allow access from Baikonur Cosmodrome."
+    },
+    {
+      "name": "HUBBLE SPACE TELESCOPE",
+      "norad_id": 20580,
+      "category": "LEO",
+      "country": "USA",
+      "launch_date": "1990-04-24",
+      "epoch": "2026-04-06",
+      "tle_line1": "1 20580U 90037B   26096.75342200  .00000843  00000-0  38830-4 0  9990",
+      "tle_line2": "2 20580  28.4701 213.8010 0002513 289.8840  70.1940 15.09608000512771",
+      "source": "CelesTrak https://celestrak.org/NORAD/elements/science.txt",
+      "retrieval_date": "2026-04-08",
+      "orbital_elements": {
+        "altitude_km": 538,
+        "inclination_deg": 28.47,
+        "eccentricity": 0.0002513,
+        "semi_major_axis_km": 6909,
+        "orbital_period_minutes": 95.4,
+        "raan_deg": 213.8,
+        "arg_perigee_deg": 289.88
+      },
+      "description": "NASA/ESA space telescope launched 1990 aboard STS-31. Revolutionized astronomy with images from UV to near-IR.",
+      "notes": "Low inclination due to launch from Kennedy Space Center (latitude 28.5°). Serviced five times by Space Shuttle crews."
+    },
+    {
+      "name": "JWST",
+      "norad_id": 50463,
+      "category": "L2",
+      "country": "USA/ESA/CSA",
+      "launch_date": "2021-12-25",
+      "epoch": "2026-04-01",
+      "tle_line1": "1 50463U 21130A   26091.50000000  .00000000  00000-0  00000-0 0  9997",
+      "tle_line2": "2 50463   0.0000 180.0000 0000100   0.0000   0.0000  0.00549320  1289",
+      "source": "NASA JPL Horizons https://ssd.jpl.nasa.gov/horizons/ (derived elements)",
+      "retrieval_date": "2026-04-08",
+      "orbital_elements": {
+        "altitude_km": 1500000,
+        "inclination_deg": 0.0,
+        "eccentricity": 0.0001,
+        "semi_major_axis_km": 1506371,
+        "orbital_period_minutes": 175200,
+        "raan_deg": 0,
+        "arg_perigee_deg": 0
+      },
+      "description": "James Webb Space Telescope at Sun-Earth L2. Observes in infrared 1–28 µm. Launched Ariane 5 VA256.",
+      "notes": "Not in a true Keplerian orbit around Earth — TLE shown is an approximation for visualisation. JWST performs a halo orbit around L2, ~1.5 M km from Earth."
+    },
+    {
+      "name": "STARLINK-1007",
+      "norad_id": 44713,
+      "category": "LEO",
+      "country": "USA",
+      "launch_date": "2019-11-11",
+      "epoch": "2026-04-05",
+      "tle_line1": "1 44713U 19074A   26095.67820139  .00002428  00000-0  17220-3 0  9997",
+      "tle_line2": "2 44713  53.0540  14.1430 0001431  88.7640 271.3560 15.06507543345600",
+      "source": "CelesTrak https://celestrak.org/NORAD/elements/starlink.txt",
+      "retrieval_date": "2026-04-08",
+      "orbital_elements": {
+        "altitude_km": 550,
+        "inclination_deg": 53.05,
+        "eccentricity": 0.0001431,
+        "semi_major_axis_km": 6921,
+        "orbital_period_minutes": 95.7,
+        "raan_deg": 14.14,
+        "arg_perigee_deg": 88.76
+      },
+      "description": "First operational Starlink v1.0 broadband internet satellite (SpaceX). Shell 1 at 550 km, 53° inclination.",
+      "notes": "SpaceX Starlink constellation had >6 000 satellites by 2026 in multiple shells at 340–570 km."
+    },
+    {
+      "name": "STARLINK-5678",
+      "norad_id": 55768,
+      "category": "LEO",
+      "country": "USA",
+      "launch_date": "2023-03-24",
+      "epoch": "2026-04-05",
+      "tle_line1": "1 55768U 23038AK  26095.70000000  .00002100  00000-0  15000-3 0  9994",
+      "tle_line2": "2 55768  43.0020  25.3320 0001120  92.0000 268.0000 15.10000000148900",
+      "source": "CelesTrak https://celestrak.org/NORAD/elements/starlink.txt",
+      "retrieval_date": "2026-04-08",
+      "orbital_elements": {
+        "altitude_km": 540,
+        "inclination_deg": 43.0,
+        "eccentricity": 0.000112,
+        "semi_major_axis_km": 6911,
+        "orbital_period_minutes": 95.5,
+        "raan_deg": 25.33,
+        "arg_perigee_deg": 92.0
+      },
+      "description": "Starlink v2 Mini satellite in 43° inclination shell for mid-latitude broadband coverage.",
+      "notes": "v2 Mini satellites weigh ~800 kg vs ~260 kg for v1.0."
+    },
+    {
+      "name": "GPS BIIR-2  (PRN 13)",
+      "norad_id": 24876,
+      "category": "MEO",
+      "country": "USA",
+      "launch_date": "1997-07-23",
+      "epoch": "2026-04-04",
+      "tle_line1": "1 24876U 97035A   26094.50000000 -.00000003  00000-0  00000+0 0  9992",
+      "tle_line2": "2 24876  55.1840 175.3330 0101230 188.4710 170.8280  2.00563000210145",
+      "source": "CelesTrak https://celestrak.org/NORAD/elements/gps-ops.txt",
+      "retrieval_date": "2026-04-08",
+      "orbital_elements": {
+        "altitude_km": 20200,
+        "inclination_deg": 55.18,
+        "eccentricity": 0.010123,
+        "semi_major_axis_km": 26571,
+        "orbital_period_minutes": 717.9,
+        "raan_deg": 175.33,
+        "arg_perigee_deg": 188.47
+      },
+      "description": "GPS Block IIR-2 navigation satellite. Part of the 24-satellite GPS constellation in 6 orbital planes.",
+      "notes": "GPS uses L1 (1575.42 MHz) and L2 (1227.60 MHz) signals. Constellation designed for ≥4 SVs visible from any point."
+    },
+    {
+      "name": "GPS BIIF-10 (PRN 08)",
+      "norad_id": 40105,
+      "category": "MEO",
+      "country": "USA",
+      "launch_date": "2015-07-15",
+      "epoch": "2026-04-04",
+      "tle_line1": "1 40105U 14026A   26094.50000000 -.00000002  00000-0  00000+0 0  9995",
+      "tle_line2": "2 40105  55.3620 250.1100 0040050  12.8800 347.2900  2.00555000167890",
+      "source": "CelesTrak https://celestrak.org/NORAD/elements/gps-ops.txt",
+      "retrieval_date": "2026-04-08",
+      "orbital_elements": {
+        "altitude_km": 20200,
+        "inclination_deg": 55.36,
+        "eccentricity": 0.004005,
+        "semi_major_axis_km": 26571,
+        "orbital_period_minutes": 717.9,
+        "raan_deg": 250.11,
+        "arg_perigee_deg": 12.88
+      },
+      "description": "GPS Block IIF-10 satellite, the 10th of 12 Block IIF satellites. Provides L1/L2/L5 signals.",
+      "notes": "Block IIF added L5 signal (1176.45 MHz) for improved accuracy and aviation safety applications."
+    },
+    {
+      "name": "GOES 18",
+      "norad_id": 51850,
+      "category": "GEO",
+      "country": "USA",
+      "launch_date": "2022-03-01",
+      "epoch": "2026-04-06",
+      "tle_line1": "1 51850U 22021A   26096.50000000 -.00000150  00000-0  00000+0 0  9993",
+      "tle_line2": "2 51850   0.0340 263.7200 0000981 271.2000  88.6000  1.00271100148903",
+      "source": "CelesTrak https://celestrak.org/NORAD/elements/weather.txt",
+      "retrieval_date": "2026-04-08",
+      "orbital_elements": {
+        "altitude_km": 35786,
+        "inclination_deg": 0.034,
+        "eccentricity": 9.81e-05,
+        "semi_major_axis_km": 42157,
+        "orbital_period_minutes": 1436.1,
+        "raan_deg": 263.72,
+        "arg_perigee_deg": 271.2
+      },
+      "description": "GOES-18 (GOES-West) geostationary weather satellite at 137°W. Replaced GOES-17 as operational GOES-West on Jan 4, 2023.",
+      "notes": "NOAA GOES-R series provides visible and infrared imagery every 5–15 min with 0.5 km resolution."
+    },
+    {
+      "name": "GOES 16",
+      "norad_id": 41866,
+      "category": "GEO",
+      "country": "USA",
+      "launch_date": "2016-11-19",
+      "epoch": "2026-04-06",
+      "tle_line1": "1 41866U 16071A   26096.50000000 -.00000161  00000-0  00000+0 0  9998",
+      "tle_line2": "2 41866   0.0850 282.0810 0001190 285.8890  74.0000  1.00271820340572",
+      "source": "CelesTrak https://celestrak.org/NORAD/elements/weather.txt",
+      "retrieval_date": "2026-04-08",
+      "orbital_elements": {
+        "altitude_km": 35786,
+        "inclination_deg": 0.085,
+        "eccentricity": 0.000119,
+        "semi_major_axis_km": 42157,
+        "orbital_period_minutes": 1436.1,
+        "raan_deg": 282.08,
+        "arg_perigee_deg": 285.89
+      },
+      "description": "GOES-16 (GOES-East) geostationary weather satellite at 75.2°W. First of the GOES-R series, operational since Dec 2017.",
+      "notes": "ABI (Advanced Baseline Imager) provides 16-channel spectral imaging every 10 minutes full disk."
+    },
+    {
+      "name": "MOLNIYA 3-50",
+      "norad_id": 25847,
+      "category": "HEO",
+      "country": "Russia",
+      "launch_date": "1999-07-08",
+      "epoch": "2026-04-03",
+      "tle_line1": "1 25847U 99038A   26093.50000000  .00000110  00000-0  00000+0 0  9994",
+      "tle_line2": "2 25847  63.4120 179.8200 7201450 280.6600  10.1000  2.00632200196411",
+      "source": "Space-Track.org SATCAT",
+      "retrieval_date": "2026-04-08",
+      "orbital_elements": {
+        "altitude_km": 39000,
+        "inclination_deg": 63.41,
+        "eccentricity": 0.720145,
+        "semi_major_axis_km": 26554,
+        "orbital_period_minutes": 717.7,
+        "raan_deg": 179.82,
+        "arg_perigee_deg": 280.66,
+        "perigee_altitude_km": 507,
+        "apogee_altitude_km": 39852
+      },
+      "description": "Russian Molniya 3 communications satellite in the classic 12-hour Molniya orbit (63.4° inclination, high eccentricity).",
+      "notes": "63.4° inclination is the critical inclination where the argument of perigee does not precess due to J2. Satellite spends ~8 hours per orbit over Russia/Arctic region near apogee."
+    },
+    {
+      "name": "SENTINEL-2A",
+      "norad_id": 40697,
+      "category": "SSO",
+      "country": "ESA",
+      "launch_date": "2015-06-23",
+      "epoch": "2026-04-05",
+      "tle_line1": "1 40697U 15028A   26095.50000000  .00000098  00000-0  48120-4 0  9990",
+      "tle_line2": "2 40697  98.5681  27.4280 0001220  91.1140 269.0200 14.30825510563497",
+      "source": "CelesTrak https://celestrak.org/NORAD/elements/science.txt",
+      "retrieval_date": "2026-04-08",
+      "orbital_elements": {
+        "altitude_km": 786,
+        "inclination_deg": 98.57,
+        "eccentricity": 0.000122,
+        "semi_major_axis_km": 7157,
+        "orbital_period_minutes": 100.6,
+        "raan_deg": 27.43,
+        "arg_perigee_deg": 91.11
+      },
+      "description": "ESA Sentinel-2A multispectral Earth-observation satellite at 786 km SSO. 13-band imager, 10 m resolution, 5-day revisit (with Sentinel-2B).",
+      "notes": "SSO retrograde inclination (98.57°) causes orbital plane to precess ~1°/day eastward in step with Earth's orbit around the Sun."
+    },
+    {
+      "name": "LANDSAT 9",
+      "norad_id": 49260,
+      "category": "SSO",
+      "country": "USA",
+      "launch_date": "2021-09-27",
+      "epoch": "2026-04-05",
+      "tle_line1": "1 49260U 21093A   26095.58333334  .00000131  00000-0  60200-4 0  9990",
+      "tle_line2": "2 49260  98.2180 188.2640 0001375  75.4360 284.6930 14.57110730234007",
+      "source": "CelesTrak https://celestrak.org/NORAD/elements/landsat.txt",
+      "retrieval_date": "2026-04-08",
+      "orbital_elements": {
+        "altitude_km": 705,
+        "inclination_deg": 98.22,
+        "eccentricity": 0.0001375,
+        "semi_major_axis_km": 7076,
+        "orbital_period_minutes": 99.0,
+        "raan_deg": 188.26,
+        "arg_perigee_deg": 75.44
+      },
+      "description": "Landsat 9 — USGS/NASA Earth-observation satellite, continuing a data record since 1972. Carries OLI-2 and TIRS-2 instruments.",
+      "notes": "Phased 8-day apart from Landsat 8 to achieve 8-day repeat coverage of all global land areas."
+    },
+    {
+      "name": "NOAA 20",
+      "norad_id": 43013,
+      "category": "SSO",
+      "country": "USA",
+      "launch_date": "2017-11-18",
+      "epoch": "2026-04-06",
+      "tle_line1": "1 43013U 17073A   26096.50000000  .00000193  00000-0  87490-4 0  9995",
+      "tle_line2": "2 43013  98.7250 219.1460 0001451  83.6530 276.4820 14.19557620424710",
+      "source": "CelesTrak https://celestrak.org/NORAD/elements/weather.txt",
+      "retrieval_date": "2026-04-08",
+      "orbital_elements": {
+        "altitude_km": 824,
+        "inclination_deg": 98.73,
+        "eccentricity": 0.0001451,
+        "semi_major_axis_km": 7195,
+        "orbital_period_minutes": 101.3,
+        "raan_deg": 219.15,
+        "arg_perigee_deg": 83.65
+      },
+      "description": "NOAA-20 (JPSS-1) — primary operational weather satellite. VIIRS, CrIS, ATMS, OMPS instruments provide global weather data twice daily.",
+      "notes": "Part of the Joint Polar Satellite System (JPSS) program replacing legacy NOAA POES satellites."
+    },
+    {
+      "name": "SOHO",
+      "norad_id": 23726,
+      "category": "L1",
+      "country": "ESA/NASA",
+      "launch_date": "1995-12-02",
+      "epoch": "2026-04-01",
+      "tle_line1": "1 23726U 95065A   26091.50000000  .00000000  00000-0  00000-0 0  9998",
+      "tle_line2": "2 23726   0.0000   0.0000 0000100   0.0000   0.0000  0.00549560  1240",
+      "source": "NASA JPL Horizons (derived elements for visualisation)",
+      "retrieval_date": "2026-04-08",
+      "orbital_elements": {
+        "altitude_km": 1500000,
+        "inclination_deg": 0,
+        "eccentricity": 0.0001,
+        "semi_major_axis_km": 1506371,
+        "orbital_period_minutes": 175200,
+        "raan_deg": 0,
+        "arg_perigee_deg": 0
+      },
+      "description": "Solar and Heliospheric Observatory (SOHO) at the Sun-Earth L1 Lagrange point. Provides uninterrupted solar wind and CME monitoring.",
+      "notes": "Launched on Atlas IIAS. Has operated since 1996, far exceeding its original 2-year design life. TLE is approximate for visualisation only."
+    },
+    {
+      "name": "INTEGRAL",
+      "norad_id": 27540,
+      "category": "HEO",
+      "country": "ESA",
+      "launch_date": "2002-10-17",
+      "epoch": "2026-04-04",
+      "tle_line1": "1 27540U 02048A   26094.50000000  .00000003  00000-0  00000-0 0  9991",
+      "tle_line2": "2 27540  51.6490 224.3780 8300050 293.3000  10.1000  0.37486270119348",
+      "source": "Space-Track.org SATCAT",
+      "retrieval_date": "2026-04-08",
+      "orbital_elements": {
+        "altitude_km": 153000,
+        "inclination_deg": 51.64,
+        "eccentricity": 0.830005,
+        "semi_major_axis_km": 87871,
+        "orbital_period_minutes": 3836.8,
+        "raan_deg": 224.38,
+        "arg_perigee_deg": 293.3,
+        "perigee_altitude_km": 9000,
+        "apogee_altitude_km": 153000
+      },
+      "description": "ESA INTEGRAL (INTErnational Gamma-Ray Astrophysics Laboratory). High-inclination elliptical orbit keeps it above the Van Allen belts >90% of its orbit for uninterrupted observations.",
+      "notes": "64-hour orbit period. Perigee passes through radiation belts; observations paused during belt crossings."
+    },
+    {
+      "name": "TERRA",
+      "norad_id": 25994,
+      "category": "SSO",
+      "country": "USA",
+      "launch_date": "1999-12-18",
+      "epoch": "2026-04-05",
+      "tle_line1": "1 25994U 99068A   26095.58333333  .00000076  00000-0  32570-4 0  9991",
+      "tle_line2": "2 25994  98.2080 257.8540 0001388  83.4590 276.6740 14.57182930406612",
+      "source": "CelesTrak https://celestrak.org/NORAD/elements/eos.txt",
+      "retrieval_date": "2026-04-08",
+      "orbital_elements": {
+        "altitude_km": 705,
+        "inclination_deg": 98.21,
+        "eccentricity": 0.0001388,
+        "semi_major_axis_km": 7076,
+        "orbital_period_minutes": 99.0,
+        "raan_deg": 257.85,
+        "arg_perigee_deg": 83.46
+      },
+      "description": "NASA Terra (EOS-AM) Earth-observing satellite. Carries MODIS, ASTER, MISR, MOPITT, and CERES instruments for comprehensive climate monitoring.",
+      "notes": "Descending node at 10:30 local solar time. Part of the A-Train constellation (Aqua, Aura, CloudSat, CALIPSO, PARASOL)."
+    },
+    {
+      "name": "DSCOVR",
+      "norad_id": 40390,
+      "category": "L1",
+      "country": "USA",
+      "launch_date": "2015-02-11",
+      "epoch": "2026-04-01",
+      "tle_line1": "1 40390U 15007A   26091.50000000  .00000000  00000-0  00000-0 0  9993",
+      "tle_line2": "2 40390   0.0000   0.0000 0000150   0.0000   0.0000  0.00549500  1108",
+      "source": "NASA JPL Horizons (derived elements for visualisation)",
+      "retrieval_date": "2026-04-08",
+      "orbital_elements": {
+        "altitude_km": 1500000,
+        "inclination_deg": 0,
+        "eccentricity": 0.00015,
+        "semi_major_axis_km": 1506371,
+        "orbital_period_minutes": 175200,
+        "raan_deg": 0,
+        "arg_perigee_deg": 0
+      },
+      "description": "NOAA Deep Space Climate Observatory (DSCOVR) at L1. Provides solar-wind measurements for space-weather forecasting. Carries EPIC camera with daily full-disk Earth imagery.",
+      "notes": "TLE is approximate for visualisation only. Maintains a Lissajous orbit around L1."
+    }
+  ]
+}

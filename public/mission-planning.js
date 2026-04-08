@@ -26,21 +26,13 @@ async function computeLaunchWindows() {
     if (loadingDiv) loadingDiv.style.display = 'block';
     
     try {
-        const response = await fetch(`${API_BASE_URL}/mission-planning/launch-windows`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                launch_site_latitude_deg: launchSiteLat,
-                launch_site_longitude_deg: launchSiteLon,
-                target_inclination_deg: targetInclination,
-                start_date: startDate,
-                num_days: numDays
-            })
+        const data = await apiCall('/mission-planning/launch-windows', 'POST', {
+            launch_site_latitude_deg: launchSiteLat,
+            launch_site_longitude_deg: launchSiteLon,
+            target_inclination_deg: targetInclination,
+            start_date: startDate,
+            num_days: numDays
         });
-        
-        if (!response.ok) throw new Error(`API error: ${response.status}`);
-        
-        const data = await response.json();
         
         displayLaunchWindows(data);
         
@@ -131,25 +123,17 @@ async function analyzePerturbations() {
     if (loadingDiv) loadingDiv.style.display = 'block';
     
     try {
-        const response = await fetch(`${API_BASE_URL}/perturbations/advanced`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                semi_major_axis_km: sma,
-                eccentricity: ecc,
-                inclination_deg: incl,
-                raan_deg: raan,
-                arg_perigee_deg: aop,
-                true_anomaly_deg: nu,
-                time_seconds: propTime,
-                include_drag: true,
-                ballistic_coefficient: ballCoeff
-            })
+        const data = await apiCall('/perturbations/advanced', 'POST', {
+            semi_major_axis_km: sma,
+            eccentricity: ecc,
+            inclination_deg: incl,
+            raan_deg: raan,
+            arg_perigee_deg: aop,
+            true_anomaly_deg: nu,
+            time_seconds: propTime,
+            include_drag: true,
+            ballistic_coefficient: ballCoeff
         });
-        
-        if (!response.ok) throw new Error(`API error: ${response.status}`);
-        
-        const data = await response.json();
         
         displayPerturbationResults(data);
         

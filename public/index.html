@@ -9,10 +9,7 @@
     <script src="https://cesium.com/downloads/cesiumjs/releases/1.110/Cesium.js"></script>
     <link href="https://cesium.com/downloads/cesiumjs/releases/1.110/Widgets/widgets.css" rel="stylesheet">
     
-    <!-- Firebase SDK (compat for namespaced APIs used in this project) -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+    <!-- No Firebase SDK required — all computation is client-side -->
     
     <!-- Bootstrap for styling -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -25,8 +22,11 @@
         <div class="container-fluid">
             <span class="navbar-brand mb-0 h1">🚀 Orbital Dynamics</span>
             <span class="navbar-text text-muted">Interactive Learning Platform</span>
-            <div id="auth-section" class="ms-auto">
-                <!-- Auth UI will be injected here -->
+            <div id="data-updated-badge" class="ms-auto me-2 text-muted small" title="Static dataset — regenerated weekly by GitHub Actions">
+                <!-- Data timestamp injected by data-config.js -->
+            </div>
+            <div id="auth-section" class="me-1">
+                <!-- Auth disabled on static GitHub Pages build -->
             </div>
         </div>
     </nav>
@@ -525,10 +525,24 @@
                     
                     <h5 class="mt-4">Additional References</h5>
                     <ul>
-                        <li>SGP4 Library: <a href="https://pypi.org/project/sgp4/" target="_blank">https://pypi.org/project/sgp4/</a></li>
                         <li>CesiumJS Documentation: <a href="https://cesium.com/platform/cesiumjs/" target="_blank">https://cesium.com/platform/cesiumjs/</a></li>
                         <li>NASA Satellite Database: <a href="https://directory.eoportal.org/" target="_blank">https://directory.eoportal.org/</a></li>
                     </ul>
+
+                    <h5 class="mt-4">📡 Data Sources &amp; Attribution</h5>
+                    <p>This site uses <strong>static, pre-computed datasets</strong> hosted on GitHub Pages. No server-side API or paid cloud service is required.</p>
+                    <ul>
+                        <li><strong>TLE Database</strong> — <a href="https://celestrak.org" target="_blank">CelesTrak</a> / <a href="https://www.space-track.org" target="_blank">Space-Track.org</a> (NORAD catalog, public domain). Snapshot: 2026-04-08.</li>
+                        <li><strong>Mission Data</strong> — <a href="https://nssdc.gsfc.nasa.gov/nmc/" target="_blank">NASA NSSDCA Mission Catalog</a>, NASA SP-4009, ESA Mission Database, SpaceX Mission Archive. Dates in UTC.</li>
+                        <li><strong>Orbit Types Catalog</strong> — Larson &amp; Wertz (1999) <em>Space Mission Engineering: The New SMAD</em>; Curtis (2013); Vallado (2013).</li>
+                        <li><strong>Ground Tracks &amp; Access Windows</strong> — Computed using two-body + J2 secular perturbation model; station coordinates from NASA SCaN network.</li>
+                        <li><strong>Perturbation Data</strong> — EGM2008 gravity model (Pavlis et al. 2012), NRLMSISE-00 atmosphere model (Picone et al. 2002).</li>
+                    </ul>
+                    <p class="text-muted small">
+                        ⚙️ Data badge: <span id="data-updated-badge-citations"></span><br>
+                        All orbital calculations run 100% client-side in your browser via <code>orbital-calculations.js</code>.<br>
+                        Source code: <a href="https://github.com/vavd24-vivi/Orbital_Mech_V2" target="_blank">github.com/vavd24-vivi/Orbital_Mech_V2</a>
+                    </p>
                 </section>
             </main>
         </div>
@@ -536,15 +550,28 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Firebase Configuration & Auth (before app.js) -->
-    <script src="firebase-config.js"></script>
-    <script src="firebase-auth.js"></script>
-    
+
+    <!-- Orbital Calculations Engine (client-side math, no server needed) -->
+    <script src="orbital-calculations.js"></script>
+
+    <!-- Data Configuration — replaces firebase-config.js; provides apiCall() shim -->
+    <script src="data-config.js"></script>
+
     <!-- Application Scripts -->
     <script src="app.js"></script>
     <script src="animation.js"></script>
     <script src="mission-planning.js"></script>
     <script src="projections.js"></script>
+
+    <script>
+        // Mirror data timestamp badge to citations section
+        document.addEventListener('DOMContentLoaded', function() {
+            const main = document.getElementById('data-updated-badge');
+            const cite = document.getElementById('data-updated-badge-citations');
+            if (main && cite) {
+                cite.textContent = main.textContent || window.DATA_UPDATED || 'See /public/data-config.js';
+            }
+        });
+    </script>
 </body>
 </html>

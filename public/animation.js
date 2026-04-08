@@ -273,15 +273,9 @@ async function requestAndPlayAnimation(orbitParams) {
     if (loadingDiv) loadingDiv.style.display = 'block';
     
     try {
-        const response = await fetch(`${API_BASE_URL}/animation/orbit-frames`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(orbitParams)
-        });
+        const data = await apiCall('/animation/orbit-frames', 'POST', orbitParams);
         
-        if (!response.ok) throw new Error(`API error: ${response.status}`);
-        
-        const data = await response.json();
+        if (data.error) throw new Error(data.error);
         
         console.log(`Received ${data.frames.length} animation frames`);
         
@@ -308,15 +302,9 @@ async function requestAndPlayAnimation(orbitParams) {
  */
 async function requestGroundTrackAnimation(groundTrackParams) {
     try {
-        const response = await fetch(`${API_BASE_URL}/animation/ground-track-trace`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(groundTrackParams)
-        });
+        const data = await apiCall('/animation/ground-track-trace', 'POST', groundTrackParams);
         
-        if (!response.ok) throw new Error(`API error: ${response.status}`);
-        
-        const data = await response.json();
+        if (data.error) throw new Error(data.error);
         
         console.log(`Ground track has ${data.frames.length} points`);
         
@@ -372,19 +360,13 @@ function displayGroundTrack(frames) {
  */
 async function requestComparativeAnimation(stateVector) {
     try {
-        const response = await fetch(`${API_BASE_URL}/animation/comparative`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                position: stateVector.position,
-                velocity: stateVector.velocity,
-                num_orbits: 1
-            })
+        const data = await apiCall('/animation/comparative', 'POST', {
+            position: stateVector.position,
+            velocity: stateVector.velocity,
+            num_orbits: 1
         });
         
-        if (!response.ok) throw new Error(`API error: ${response.status}`);
-        
-        const data = await response.json();
+        if (data.error) throw new Error(data.error);
         
         console.log('Comparative animation data received');
         

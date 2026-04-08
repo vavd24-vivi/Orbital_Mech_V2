@@ -1,12 +1,220 @@
 # 🚀 Orbital Dynamics: Interactive Educational Web Platform
 
-An interactive educational website for learning orbital mechanics, TLE data analysis, and space mission planning. Built with **Firebase Cloud Functions** (Python 3.12) backend and **CesiumJS** for 3D visualization.
+An interactive educational website for learning orbital mechanics, TLE data analysis, and space mission planning. Hosted 100% free on **GitHub Pages** with all calculations running client-side in the browser.
 
-**🎉 NEW**: Now powered by Firebase with user authentication, data persistence, and global CDN distribution!
+**No Firebase. No server. No paid tier. No surprises.**
 
 **Target Audience**: Space enthusiasts, engineering students, flight operations professionals, and anyone preparing for careers in space operations.
 
-**Tone**: Accessible science communication  - making complex orbital mechanics engaging and understandable.
+**Tone**: Accessible science communication — making complex orbital mechanics engaging and understandable (à la Crash Course meets real mission ops).
+
+---
+
+## 🌐 Live Site
+
+> **GitHub Pages URL**: `https://<your-github-username>.github.io/Orbital_Mech_V2/`
+>
+> Set up GitHub Pages from the **`/public` directory** of the `main` branch (see [Deployment](#deployment) below).
+
+---
+
+## 🎯 Quick Links
+
+| Resource | Location |
+|----------|----------|
+| Main site | `/public/index.html` |
+| Orbital calculations engine | `/public/orbital-calculations.js` |
+| Data API shim | `/public/data-config.js` |
+| TLE database | `/public/data/tle-database.json` |
+| Mission history | `/public/data/missions.json` |
+| Orbit types catalog | `/public/data/orbit-types.json` |
+| Ground tracks | `/public/data/precomputed-groundtracks.json` |
+| Perturbation analysis | `/public/data/perturbation-analysis.json` |
+| Data generator script | `/scripts/generate_orbital_data.py` |
+| Deploy workflow | `/.github/workflows/deploy.yml` |
+| Weekly data refresh | `/.github/workflows/update-data.yml` |
+
+---
+
+## ✨ Features
+
+### Core Orbital Mechanics (100% client-side)
+
+- **TLE Understanding & Parsing** — parse Two-Line Element sets in the browser using `orbital-calculations.js`
+- **State Vector Conversions** — bidirectional Keplerian ↔ Cartesian (Curtis 2013, Algorithm 4.1/4.2)
+- **Interactive 3D Visualization** — CesiumJS-powered 3D Earth with real-time orbit rendering
+- **Dynamic Orbital Element Sliders** — adjust a, e, i, Ω, ω, ν and see instant updates
+- **Orbit Type Catalog** — LEO, MEO, GEO, HEO/Molniya, SSO, Polar, Lagrange (L1/L2)
+- **Hohmann Transfer Calculator** — ΔV₁, ΔV₂, transfer time using vis-viva equation
+- **Orbit Animation** — two-body + J2 secular propagation at 360 steps/orbit
+- **Ground Track Visualisation** — ECI → Geodetic conversion with Earth rotation (GMST)
+- **Launch Window Computation** — spherical-Earth launch-azimuth constraint
+- **Perturbation Analysis** — J2 + J3 + J4 zonal harmonic rates, atmospheric drag model
+- **Map Projections** — Sinusoidal, Mollweide, Equirectangular, Lambert Azimuthal
+- **Mission Planning** — ΔV budgets, orbit classification, mission export to JSON
+
+### Real Orbital Database (static JSON, source-cited)
+
+- **TLE snapshots** for 16 real spacecraft (ISS, Hubble, JWST, Starlink, GPS, GOES, Molniya, Sentinel, Landsat, NOAA, Terra, SOHO, DSCOVR, INTEGRAL)
+- **Mission histories** for 14 missions (Apollo 11, 13; STS-1, STS-51-L; Mir; ISS Expeditions 1 and 68; SpaceX DM-2, Inspiration4, Crew-5; Tiangong; Shenzhou-15; Blue Origin NS-18; Artemis I; Voyager 1)
+- **Orbit types catalog** with real spacecraft examples, GNSS constellation parameters, GEO arc details, Molniya critical-inclination derivation
+- **Pre-computed ground tracks** for ISS, Hubble, Sentinel-2A — with access windows from KSC, Baikonur, Kourou, Goldstone, Weilheim, SvalSat
+- **Perturbation analysis tables** — J2–J4 RAAN precession rates, atmospheric drag lifetimes, critical inclination analysis
+
+---
+
+## 🗂️ Data Sources & Attribution
+
+All data includes source URL, retrieval date, and accuracy notes per APA 7th edition conventions.
+
+| Dataset | Primary Source | License |
+|---------|---------------|---------|
+| TLE data | [CelesTrak](https://celestrak.org) / [Space-Track.org](https://www.space-track.org) | Public domain (NORAD) |
+| Mission parameters | [NASA NSSDCA](https://nssdc.gsfc.nasa.gov/nmc/) | Public domain |
+| Gravity constants (J2–J4) | EGM2008 — Pavlis et al. (2012) *JGR* 117 B04406 | Public |
+| Atmosphere model | NRLMSISE-00 — Picone et al. (2002) *JGR* 107, A12 | Public |
+| Orbital mechanics formulae | Curtis (2013); Vallado et al. (2006); Bate et al. (1971) | Textbooks |
+
+---
+
+## 🚀 Deployment
+
+### Option A — GitHub Pages (Recommended, 100% Free)
+
+1. **Fork / clone** this repository.
+
+2. In GitHub → **Settings → Pages**:
+   - Source: **Deploy from a branch**
+   - Branch: `main` → Folder: `/public`
+   - Click **Save**
+
+3. Your site will be live at:
+   ```
+   https://<your-username>.github.io/Orbital_Mech_V2/
+   ```
+
+4. *(Optional)* Enable the included GitHub Actions workflows:
+   - `.github/workflows/deploy.yml` — auto-deploy on push to `main`
+   - `.github/workflows/update-data.yml` — refresh TLE data every Monday 04:00 UTC
+
+That's it. No Firebase account. No credit card. No billing alerts. 🎉
+
+### Option B — GitHub Actions (CI/CD deploy)
+
+The `deploy.yml` workflow runs `scripts/generate_orbital_data.py` (updates timestamps),
+then deploys `/public` to GitHub Pages automatically on every push to `main`.
+
+Enable it via **Settings → Pages → Source: GitHub Actions**.
+
+---
+
+## 🛠️ Local Development
+
+```bash
+# Serve the /public directory with any static file server
+# Option 1: Python built-in
+cd public
+python -m http.server 8080
+
+# Option 2: Node.js
+npx serve public
+
+# Option 3: VS Code Live Server extension (open public/index.html)
+```
+
+Then open `http://localhost:8080` in your browser.
+
+No build step required — it's all vanilla HTML, CSS, and JavaScript.
+
+### Regenerate data files
+
+```bash
+# Update timestamps only (no network required)
+python scripts/generate_orbital_data.py
+
+# Fetch fresh TLEs from CelesTrak (requires internet)
+python scripts/generate_orbital_data.py --fetch-live
+```
+
+Python 3.12+ required. No third-party packages required for basic regeneration.
+(`requests` optional for `--fetch-live`.)
+
+---
+
+## 📁 Project Structure
+
+```
+Orbital_Mech_V2/
+├── public/                       # ← GitHub Pages root
+│   ├── index.html                # Main entry point
+│   ├── styles.css                # Visual styles
+│   ├── orbital-calculations.js   # Client-side orbital math engine
+│   ├── data-config.js            # apiCall() shim + data loader (replaces Firebase)
+│   ├── app.js                    # Main application logic
+│   ├── animation.js              # Orbit animation module
+│   ├── mission-planning.js       # Launch window & mission planning
+│   ├── projections.js            # 2D map projection ground tracks
+│   ├── .nojekyll                 # Disable Jekyll processing on GitHub Pages
+│   └── data/                     # Static JSON datasets
+│       ├── tle-database.json     # Real TLE snapshots for 16 spacecraft
+│       ├── missions.json         # 14 real mission histories
+│       ├── orbit-types.json      # Orbit classification catalog
+│       ├── precomputed-groundtracks.json   # Ground tracks + access windows
+│       └── perturbation-analysis.json      # J2–J4 rates, drag analysis
+├── scripts/
+│   └── generate_orbital_data.py  # Python pre-computation script
+├── backend/                      # Legacy Python backend (not deployed)
+│   ├── orbital_mechanics/        # Python orbital mechanics library
+│   └── functions/                # Former Firebase Cloud Functions
+├── .github/
+│   └── workflows/
+│       ├── deploy.yml            # GitHub Pages deploy on push
+│       └── update-data.yml       # Weekly TLE data refresh
+└── firebase.json                 # Firebase hosting config (functions removed)
+```
+
+---
+
+## 🧮 Orbital Calculations Engine
+
+`/public/orbital-calculations.js` implements all backend computations in JavaScript:
+
+| Function | Description | Reference |
+|----------|-------------|-----------|
+| `parseTLE(name, l1, l2)` | Parse NORAD TLE format | Kelso (2006) |
+| `keplerianToCartesian(a,e,i,Ω,ω,ν)` | Keplerian → ECI state vectors | Curtis (2013) Alg. 4.2 |
+| `cartesianToKeplerian(r,v)` | ECI state vectors → Keplerian | Curtis (2013) Alg. 4.1 |
+| `propagateTwoBody(elements, dt)` | Two-body Keplerian propagation | Bate et al. (1971) |
+| `applyJ2Perturbation(elements, dt)` | J2 secular RAAN/AoP drift | Vallado (2013) Eq. 9-38 |
+| `generateOrbitFrames(params)` | Multi-orbit animation frame generator | — |
+| `generateGroundTrack(params)` | ECI → geodetic with GMST | — |
+| `hohmannTransfer(r1, r2)` | Hohmann ΔV and transfer time | Curtis (2013) §7.3 |
+| `advancedPerturbationAnalysis(params)` | J2+J3+J4+drag analysis | Vallado (2013) |
+| `computeLaunchWindows(params)` | Launch azimuth constraint | Wertz & Larson (1999) |
+| `getOrbitCatalog()` | Orbit type reference catalog | — |
+
+---
+
+## 📚 References (APA 7th Edition)
+
+Bate, R. R., Mueller, D. D., & White, J. E. (1971). *Fundamentals of astrodynamics*. Dover Publications.
+
+Curtis, H. D. (2013). *Orbital mechanics for engineering students* (3rd ed.). Butterworth-Heinemann. https://doi.org/10.1016/C2011-0-69685-1
+
+Larson, W. J., & Wertz, J. R. (Eds.). (1999). *Space mission engineering: The new SMAD*. Microcosm Press.
+
+Pavlis, N. K., Holmes, S. A., Kenyon, S. C., & Factor, J. K. (2012). The development and evaluation of the Earth Gravitational Model 2008 (EGM2008). *Journal of Geophysical Research: Solid Earth*, *117*(B4). https://doi.org/10.1029/2011JB008916
+
+Picone, J. M., Hedin, A. E., Drob, D. P., & Aikin, A. C. (2002). NRLMSISE-00 empirical model of the atmosphere. *Journal of Geophysical Research: Space Physics*, *107*(A12). https://doi.org/10.1029/2002JA009430
+
+Vallado, D. A. (2013). *Fundamentals of astrodynamics and applications* (4th ed.). Microcosm Press & Springer.
+
+Vallado, D. A., Crawford, P., Hujsak, R., & Kelso, T. S. (2006). Revisiting Spacetrack Report #3: Rev 1. *AIAA Paper 2006-6753*. https://celestrak.org/publications/AIAA/2006-6753/
+
+---
+
+*Hosted on GitHub Pages — no server, no Firebase, no cost.* 🌍
+
 
 ---
 
